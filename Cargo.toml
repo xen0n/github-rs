@@ -1,0 +1,25 @@
+[package]
+authors = ["Michael Gattozzi <mgattozzi@gmail.com>"]
+description = "Pure Rust bindings to the Github API"
+name = "github-rs"
+version = "0.1.0"
+license = "MIT"
+repository = "https://github.com/mgattozzi/github-rs.git"
+homepage = "https://github.com/mgattozzi/github-rs"
+documentation = "https://mgattozzi.github.io/github-rs"
+
+[dependencies]
+hyper = "0.9.10"
+serde = "0.7.4"
+serde_json = "0.7.4"
+serde_macros = "0.7.4"
+solicit = "0.4.4"
+url = "1.1.1"
+
+[dependencies.clippy]
+optional = true
+version = "*"
+
+[features]
+default = []
+dev = ["clippy"]
