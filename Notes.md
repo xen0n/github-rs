@@ -2,7 +2,6 @@
 
 - GPG Experimental so not implemented
 - Methods all completed
-- Needs Docs
 
 # Misc:
 - Emojis still needs to be implemented as a structure
