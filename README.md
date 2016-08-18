@@ -10,10 +10,15 @@
 
 Pure Rust bindings to the Github API using Hyper and Serde
 
-This is in no way close to being usable for most of the API nor does it
-have good error handling. I'm uploading this to save progress right
-now. When it's ready all commits will be squashed into one initial
-commit and from there be changed publicly.
+## Alpha Software
+This is in no way close to being done for most of the Github API. That
+being said it's in a somewhat usable state for some things and can be
+extended to cover other parts of the API easily now that requests and
+error handling underlying the API are stabilized for now.
+
+Since there are nightly features are being used and because taking the
+time to get syntex working for stable is a larger undertaking this
+software only compiles on nightly for now.
 
 ## Project Aims
 - Have a robust API where everything is error handled properly to avoid
