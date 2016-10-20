@@ -26,7 +26,7 @@ impl Repos for Client {
     /// ### Description
     /// Creates a new repo for the authenticated user and returns the new `Repo`s stats
     fn post_user_repos(&self, repo: RepoCreate) -> Result<Repo> {
-        let url = "https://github.com/user/repos";
+        let url = "https://api.github.com/user/repos";
         let res = try!(post(url,
                             self.headers.clone(),
                             try!(serde_json::to_string(&repo))));
