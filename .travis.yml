@@ -1,7 +1,7 @@
 sudo: true
 language: rust
 rust:
-  - nightly-2016-08-12
+  - nightly
 addons:
   apt:
     packages:

@@ -136,7 +136,6 @@ impl From<serdeErr::Error> for GithubError {
         match serde {
             Syntax(x, y, z) => JsonParsingSyntax(x, y, z),
             Io(err) => JsonParsingIo(err),
-            FromUtf8(err) => JsonParsingFromUtf8(err),
         }
     }
 }
