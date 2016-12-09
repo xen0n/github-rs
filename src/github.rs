@@ -151,7 +151,7 @@ impl Client {
         let cloned = acc_token.clone();
         Ok(Client {
             token: acc_token,
-            headers: try!(default_headers(cloned)),
+            headers: default_headers(cloned)?,
         })
     }
 }

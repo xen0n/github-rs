@@ -79,7 +79,7 @@ impl Misc for Client {
     /// Returns a `Meta` struct which contains information about the Github service
     fn get_meta(&self) -> Result<Meta> {
         let url = "https://api.github.com/meta";
-        let data = try!(get(url, self.headers.clone()));
+        let data = get(url, self.headers.clone())?;
         try_serde!(serde_json::from_str(&data))
     }
 
@@ -92,7 +92,7 @@ impl Misc for Client {
     /// Note hiting this endpoint with a request does not count against that limit.
     fn get_rate_limit(&self) -> Result<RateLimit> {
         let url = "https://api.github.com/rate_limit";
-        let data = try!(get(url, self.headers.clone()));
+        let data = get(url, self.headers.clone())?;
         try_serde!(serde_json::from_str(&data))
     }
 
@@ -104,7 +104,7 @@ impl Misc for Client {
     /// Returns a vector of the languages that have gitignore templates on Github.
     fn get_gitignore_templates(&self) -> Result<Vec<String>> {
         let url = "https://api.github.com/gitignore/templates";
-        let data = try!(get(url, self.headers.clone()));
+        let data = get(url, self.headers.clone())?;
         try_serde!(serde_json::from_str(&data))
     }
 
@@ -119,7 +119,7 @@ impl Misc for Client {
     fn get_gitignore_templates_lang(&self, lang: &str) -> Result<GitIgnore> {
         let mut url = String::from("https://api.github.com/gitignore/templates/");
         url.push_str(lang);
-        let data = try!(get(&url, self.headers.clone()));
+        let data = get(&url, self.headers.clone())?;
         try_serde!(serde_json::from_str(&data))
     }
 
@@ -131,9 +131,9 @@ impl Misc for Client {
     /// Returns a rendered version of the `Markdown` sent to Github as `HTML`.
     fn post_markdown(&self, data: Markdown) -> Result<HTML> {
         let url = "https://api.github.com/markdown";
-        let data = try!(post(url,
-                             self.headers.clone(),
-                             try!(serde_json::to_string(&data))));
+        let data = post(url,
+                        self.headers.clone(),
+                        serde_json::to_string(&data)?)?;
         try_serde!(serde_json::from_str(&data))
     }
 
@@ -148,9 +148,9 @@ impl Misc for Client {
     // the datatype to be raw not JSON
     fn post_markdown_raw(&self, data: Markdown) -> Result<HTML> {
         let url = "https://api.github.com/markdown/raw";
-        let data = try!(post(url,
-                             self.headers.clone(),
-                             try!(serde_json::to_string(&data))));
+        let data = post(url,
+                        self.headers.clone(),
+                        serde_json::to_string(&data)?)?;
         try_serde!(serde_json::from_str(&data))
     }
 

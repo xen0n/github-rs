@@ -231,7 +231,7 @@ impl Users for Client {
     /// Returns a `User` Struct for the authenticated user.
     fn get_user(&self) -> Result<User> {
         let url = "https://api.github.com/user";
-        let data = try!(get(url, self.headers.clone()));
+        let data = get(url, self.headers.clone())?;
         try_serde!(serde_json::from_str(&data))
 
     }
@@ -245,7 +245,7 @@ impl Users for Client {
     fn get_users_username(&self, username: &str) -> Result<User> {
         let mut url = String::from("https://api.github.com/users/");
         url.push_str(username);
-        let data = try!(get(&url, self.headers.clone()));
+        let data = get(&url, self.headers.clone())?;
 
         try_serde!(serde_json::from_str(&data))
     }
@@ -267,7 +267,7 @@ impl Users for Client {
             url.push_str(&num.to_string());
         }
 
-        let data = try!(get(&url, self.headers.clone()));
+        let data = get(&url, self.headers.clone())?;
 
         try_serde!(serde_json::from_str(&data))
     }
@@ -282,7 +282,7 @@ impl Users for Client {
     fn get_user_emails(&self, page_num: Option<u64>, per_page: Option<u64>) -> Result<Vec<Email>> {
         let mut url = String::from("https://api.github.com/user/emails");
         paginate!(url,page_num,per_page);
-        let data = try!(get(&url, self.headers.clone()));
+        let data = get(&url, self.headers.clone())?;
         try_serde!(serde_json::from_str(&data))
     }
 
@@ -302,7 +302,7 @@ impl Users for Client {
         url.push_str(username);
         url.push_str("/followers");
         paginate!(url,page_num,per_page);
-        let data = try!(get(&url, self.headers.clone()));
+        let data = get(&url, self.headers.clone())?;
         try_serde!(serde_json::from_str(&data))
     }
 
@@ -319,7 +319,7 @@ impl Users for Client {
                           -> Result<Vec<User>> {
         let mut url = String::from("https://api.github.com/user/followers");
         paginate!(url,page_num,per_page);
-        let data = try!(get(&url, self.headers.clone()));
+        let data = get(&url, self.headers.clone())?;
         try_serde!(serde_json::from_str(&data))
 
     }
@@ -340,7 +340,7 @@ impl Users for Client {
         url.push_str(username);
         url.push_str("/following");
         paginate!(url,page_num,per_page);
-        let data = try!(get(&url, self.headers.clone()));
+        let data = get(&url, self.headers.clone())?;
         try_serde!(serde_json::from_str(&data))
 
     }
@@ -358,7 +358,7 @@ impl Users for Client {
                           -> Result<Vec<User>> {
         let mut url = String::from("https://api.github.com/user/following");
         paginate!(url,page_num,per_page);
-        let data = try!(get(&url, self.headers.clone()));
+        let data = get(&url, self.headers.clone())?;
         try_serde!(serde_json::from_str(&data))
 
     }
@@ -371,9 +371,9 @@ impl Users for Client {
     /// Returns a `User` struct of the authenticated user once their data has been updated
     fn patch_user(&self, user: PatchUser) -> Result<User> {
         let url = "https://api.github.com/user";
-        let res = try!(patch(url,
-                             self.headers.clone(),
-                             try!(serde_json::to_string(&user))));
+        let res = patch(url,
+                        self.headers.clone(),
+                        serde_json::to_string(&user)?)?;
         try_serde!(serde_json::from_str(&res))
     }
 
@@ -385,9 +385,9 @@ impl Users for Client {
     /// Returns a vector of `Email`s when they've been added to the user's profile
     fn post_user_emails(&self, emails: Vec<String>) -> Result<Vec<Email>> {
         let url = "https://api.github.com/user/emails";
-        let res = try!(post(url,
-                            self.headers.clone(),
-                            try!(serde_json::to_string(&emails))));
+        let res = post(url,
+                       self.headers.clone(),
+                       serde_json::to_string(&emails)?)?;
         try_serde!(serde_json::from_str(&res))
     }
 
@@ -400,7 +400,7 @@ impl Users for Client {
     fn put_user_following_username(&self, username: &str) -> Result<bool> {
         let mut url = String::from("https://api.github.com/user/following/");
         url.push_str(username);
-        let res = try!(put(&url, self.headers.clone()));
+        let res = put(&url, self.headers.clone())?;
         Ok(res == StatusCode::NoContent)
     }
 
@@ -414,7 +414,7 @@ impl Users for Client {
     fn delete_user_following_username(&self, username: &str) -> Result<bool> {
         let mut url = String::from("https://api.github.com/user/following/");
         url.push_str(username);
-        let res = try!(delete(&url, self.headers.clone()));
+        let res = delete(&url, self.headers.clone())?;
         Ok(res == StatusCode::NoContent)
     }
 
@@ -428,7 +428,7 @@ impl Users for Client {
     fn get_user_following_username(&self, username: &str) -> Result<bool> {
         let mut url = String::from("https://api.github.com/user/following/");
         url.push_str(username);
-        let res = try!(get_status_code(&url, self.headers.clone()));
+        let res = get_status_code(&url, self.headers.clone())?;
         Ok(res == StatusCode::NoContent)
     }
 
@@ -446,7 +446,7 @@ impl Users for Client {
         url.push_str(username);
         url.push_str("/following/");
         url.push_str(target_user);
-        let res = try!(get_status_code(&url, self.headers.clone()));
+        let res = get_status_code(&url, self.headers.clone())?;
         Ok(res == StatusCode::NoContent)
     }
 
@@ -460,7 +460,7 @@ impl Users for Client {
         let mut url = String::from("https://api.github.com/users/");
         url.push_str(username);
         url.push_str("/keys");
-        let res = try!(get(&url, self.headers.clone()));
+        let res = get(&url, self.headers.clone())?;
         try_serde!(serde_json::from_str(&res))
     }
 
@@ -472,7 +472,7 @@ impl Users for Client {
     /// Returns a Vector of all `SSHKey`s that the authenticate user might have.
     fn get_user_keys(&self) -> Result<Vec<SSHKey>> {
         let url = "https://api.github.com/user/keys";
-        let res = try!(get(url, self.headers.clone()));
+        let res = get(url, self.headers.clone())?;
         try_serde!(serde_json::from_str(&res))
     }
 
@@ -486,7 +486,7 @@ impl Users for Client {
     fn get_user_keys_id(&self, id: u64) -> Result<Option<SSHKey>> {
         let mut url = String::from("https://api.github.com/user/keys/");
         url.push_str(&id.to_string());
-        let res = try!(get(&url, self.headers.clone()));
+        let res = get(&url, self.headers.clone())?;
 
         // Try and fix this
         if let Ok(serial) = serde_json::from_str(&res) {
@@ -504,9 +504,9 @@ impl Users for Client {
     /// Creates a new SSH key sending it back if it worked out properly.
     fn post_user_keys(&self, new_key: SSHKey) -> Result<SSHKey> {
         let url = "https://api.github.com/user/keys";
-        let res = try!(post(url,
-                            self.headers.clone(),
-                            try!(serde_json::to_string(&new_key))));
+        let res = post(url,
+                       self.headers.clone(),
+                       serde_json::to_string(&new_key)?)?;
         try_serde!(serde_json::from_str(&res))
 
     }
@@ -521,7 +521,7 @@ impl Users for Client {
     fn delete_user_keys(&self, id: u64) -> Result<bool> {
         let mut url = String::from("https://api.github.com/user/keys");
         url.push_str(&id.to_string());
-        let res = try!(delete(&url, self.headers.clone()));
+        let res = delete(&url, self.headers.clone())?;
         Ok(res == StatusCode::NoContent)
     }
 
@@ -534,9 +534,9 @@ impl Users for Client {
     /// strings must match verbatim for the corresponding email to be deleted.
     fn delete_user_emails(&self, emails: Vec<String>) -> Result<bool> {
         let url = "https://api.github.com/user/emails";
-        let res = try!(delete_with_data(url,
-                                        self.headers.clone(),
-                                        try!(serde_json::to_string(&emails))));
+        let res = delete_with_data(url,
+                                   self.headers.clone(),
+                                   serde_json::to_string(&emails)? )?;
         Ok(res == StatusCode::NoContent)
     }
 }
