@@ -18,7 +18,7 @@ url = "1.1.1"
 
 [dependencies.clippy]
 optional = true
-version = "*"
+version = "0.0.83"
 
 [features]
 default = []
