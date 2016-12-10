@@ -1,7 +1,11 @@
 sudo: true
 language: rust
+os:
+  - linux
+  - osx
 rust:
   - nightly
+cache: cargo
 addons:
   apt:
     packages:
@@ -14,29 +18,34 @@ addons:
 before_install:
 - openssl aes-256-cbc -K $encrypted_b63566236b41_key -iv $encrypted_b63566236b41_iv
   -in auth_token.enc -out tests/auth_token -d
-before_script:
 - |
-  pip install 'travis-cargo<0.2' --user &&
-  export PATH=$HOME/.local/bin:$PATH &&
-  sudo apt-get update
+    if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+      brew update
+      brew install openssl
+      brew link --force openssl
+      export OPENSSL_INCLUDE_DIR=`brew --prefix openssl`/include
+      export OPENSSL_LIB_DIR=`brew --prefix openssl`/lib
+      export DEP_OPENSSL_INCLUDE=`brew --prefix openssl`/include
+    fi
 script:
-- travis-cargo build && travis-cargo test && travis-cargo doc
+- cargo build && cargo test
 after_success: |
-  travis-cargo doc-upload
-  wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz &&
-  tar xzf master.tar.gz &&
-  cd kcov-master &&
-  mkdir build &&
-  cd build &&
-  cmake .. &&
-  make &&
-  sudo make install &&
-  cd ../.. &&
-  rm -rf kcov-master &&
-  for file in target/debug/github_rs-*; do mkdir -p "target/cov/$(basename $file)"; kcov --exclude-pattern=/.cargo,/usr/lib --verify "target/cov/$(basename $file)" "$file"; done &&
-  for file in target/debug/harness-*; do mkdir -p "target/cov/$(basename $file)"; kcov --exclude-pattern=/.cargo,/usr/lib --verify "target/cov/$(basename $file)" "$file"; done &&
-  bash <(curl -s https://codecov.io/bash) &&
-  echo "Uploaded code coverage"
+    if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+      wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz &&
+      tar xzf master.tar.gz &&
+      cd kcov-master &&
+      mkdir build &&
+      cd build &&
+      cmake .. &&
+      make &&
+      sudo make install &&
+      cd ../.. &&
+      rm -rf kcov-master &&
+      for file in target/debug/github_rs-*; do mkdir -p "target/cov/$(basename $file)"; kcov --exclude-pattern=/.cargo,/usr/lib --verify "target/cov/$(basename $file)" "$file"; done &&
+      for file in target/debug/harness-*; do mkdir -p "target/cov/$(basename $file)"; kcov --exclude-pattern=/.cargo,/usr/lib --verify "target/cov/$(basename $file)" "$file"; done &&
+      bash <(curl -s https://codecov.io/bash) &&
+      echo "Uploaded code coverage"
+    fi
 env:
   global:
   - TRAVIS_CARGO_NIGHTLY_FEATURE=""
