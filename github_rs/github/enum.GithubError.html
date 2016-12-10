@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `GithubError` enum in crate `github_rs`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, GithubError">
+
+    <title>github_rs::github::GithubError - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='../index.html'>github_rs</a>::<wbr><a href='index.html'>github</a></p><script>window.sidebarCurrent = {name: 'GithubError', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content enum">
+<h1 class='fqn'><span class='in-band'>Enum <a href='../index.html'>github_rs</a>::<wbr><a href='index.html'>github</a>::<wbr><a class='enum' href=''>GithubError</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../../src/github_rs/error.rs.html#33-84' title='goto source code'>[src]</a></span></h1>
+<pre class='rust enum'>pub enum GithubError {
+    JsonParsingSyntax(<a class='enum' href='../../serde_json/error/enum.ErrorCode.html' title='serde_json::error::ErrorCode'>ErrorCode</a>,&nbsp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>,&nbsp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>),
+    JsonParsingIo(<a class='struct' href='https://doc.rust-lang.org/nightly/std/io/error/struct.Error.html' title='std::io::error::Error'>Error</a>),
+    JsonParsingFromUtf8(<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.FromUtf8Error.html' title='collections::string::FromUtf8Error'>FromUtf8Error</a>),
+    Request,
+    RequestMethod,
+    RequestUri(<a class='enum' href='../../url/parser/enum.ParseError.html' title='url::parser::ParseError'>ParseError</a>),
+    RequestVersion,
+    RequestHeader,
+    RequestTooLarge,
+    RequestStatus,
+    RequestIo(<a class='struct' href='https://doc.rust-lang.org/nightly/std/io/error/struct.Error.html' title='std::io::error::Error'>Error</a>),
+    RequestSsl(<a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='https://doc.rust-lang.org/nightly/std/error/trait.Error.html' title='std::error::Error'>Error</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a>&gt;),
+    RequestHttp2(<a class='type' href='../../github_rs/github/type.Http2Error.html' title='github_rs::github::Http2Error'>Http2Error</a>),
+    RequestUtf8(<a class='struct' href='https://doc.rust-lang.org/nightly/core/str/struct.Utf8Error.html' title='core::str::Utf8Error'>Utf8Error</a>),
+    NonJsonBody,
+    InvalidFields,
+    Unauthorized,
+    QueryLimit,
+    LibIo(<a class='struct' href='https://doc.rust-lang.org/nightly/std/io/error/struct.Error.html' title='std::io::error::Error'>Error</a>),
+    LibError,
+}</pre><div class='docblock'><p>Errors related to improper usage of the API</p>
+</div><h2 class='variants'>Variants</h2>
+<span id='variant.JsonParsingSyntax' class='variant'><span id='JsonParsingSyntax.v' class='invisible'><code>JsonParsingSyntax(<a class='enum' href='../../serde_json/error/enum.ErrorCode.html' title='serde_json::error::ErrorCode'>ErrorCode</a>,&nbsp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>,&nbsp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</code></span></span><div class='docblock'><p>Encountered if serde cannot deserialize JSON returned from the API or it cannot serialize
+a struct into JSON to be sent to the API.</p>
+</div><span id='variant.JsonParsingIo' class='variant'><span id='JsonParsingIo.v' class='invisible'><code>JsonParsingIo(<a class='struct' href='https://doc.rust-lang.org/nightly/std/io/error/struct.Error.html' title='std::io::error::Error'>Error</a>)</code></span></span><div class='docblock'><p>While parsing with serde an IO error occured.</p>
+</div><span id='variant.JsonParsingFromUtf8' class='variant'><span id='JsonParsingFromUtf8.v' class='invisible'><code>JsonParsingFromUtf8(<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.FromUtf8Error.html' title='collections::string::FromUtf8Error'>FromUtf8Error</a>)</code></span></span><div class='docblock'><p>While converting from Utf8 into a byte string for the request to the API an error occured</p>
+</div><span id='variant.Request' class='variant'><span id='Request.v' class='invisible'><code>Request</code></span></span><div class='docblock'><p>A General error for the hyper library when none of the other errors work for it.</p>
+</div><span id='variant.RequestMethod' class='variant'><span id='RequestMethod.v' class='invisible'><code>RequestMethod</code></span></span><div class='docblock'><p>While setting up the method for the request an error occurred (i.e. <code>PST</code> instead of
+<code>POST</code>)</p>
+</div><span id='variant.RequestUri' class='variant'><span id='RequestUri.v' class='invisible'><code>RequestUri(<a class='enum' href='../../url/parser/enum.ParseError.html' title='url::parser::ParseError'>ParseError</a>)</code></span></span><div class='docblock'><p>While parsing the Uri for the request an error occurred</p>
+</div><span id='variant.RequestVersion' class='variant'><span id='RequestVersion.v' class='invisible'><code>RequestVersion</code></span></span><div class='docblock'><p>An error occured with the version used to communicate (i.e. <code>HTP/1.1</code> instead of
+<code>HTTP/1.1</code>)</p>
+</div><span id='variant.RequestHeader' class='variant'><span id='RequestHeader.v' class='invisible'><code>RequestHeader</code></span></span><div class='docblock'><p>An error in creating the header occurred  making the request invalid</p>
+</div><span id='variant.RequestTooLarge' class='variant'><span id='RequestTooLarge.v' class='invisible'><code>RequestTooLarge</code></span></span><div class='docblock'><p>The request being sent is far to large to work</p>
+</div><span id='variant.RequestStatus' class='variant'><span id='RequestStatus.v' class='invisible'><code>RequestStatus</code></span></span><div class='docblock'><p>An invalid status code was retuned</p>
+</div><span id='variant.RequestIo' class='variant'><span id='RequestIo.v' class='invisible'><code>RequestIo(<a class='struct' href='https://doc.rust-lang.org/nightly/std/io/error/struct.Error.html' title='std::io::error::Error'>Error</a>)</code></span></span><div class='docblock'><p>While performing an IO action with hyper an error occurred</p>
+</div><span id='variant.RequestSsl' class='variant'><span id='RequestSsl.v' class='invisible'><code>RequestSsl(<a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='https://doc.rust-lang.org/nightly/std/error/trait.Error.html' title='std::error::Error'>Error</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a>&gt;)</code></span></span><div class='docblock'><p>While intitiating, in the process of, or while terminating an SSL connection with the API
+an error occurred.</p>
+</div><span id='variant.RequestHttp2' class='variant'><span id='RequestHttp2.v' class='invisible'><code>RequestHttp2(<a class='type' href='../../github_rs/github/type.Http2Error.html' title='github_rs::github::Http2Error'>Http2Error</a>)</code></span></span><div class='docblock'><p>While attemptin to make a connection via Http2 an error occured</p>
+</div><span id='variant.RequestUtf8' class='variant'><span id='RequestUtf8.v' class='invisible'><code>RequestUtf8(<a class='struct' href='https://doc.rust-lang.org/nightly/core/str/struct.Utf8Error.html' title='core::str::Utf8Error'>Utf8Error</a>)</code></span></span><div class='docblock'><p>An error within the byte string for the request to the API occured</p>
+</div><span id='variant.NonJsonBody' class='variant'><span id='NonJsonBody.v' class='invisible'><code>NonJsonBody</code></span></span><div class='docblock'><p>Encountered if whatever was returned was not at all JSON</p>
+</div><span id='variant.InvalidFields' class='variant'><span id='InvalidFields.v' class='invisible'><code>InvalidFields</code></span></span><div class='docblock'><p>Encountered if you&#39;ve made a request with improper JSON. Most likely encountered
+where serde serializes a struct incorrectly, otherwise type checking prevents this error.</p>
+</div><span id='variant.Unauthorized' class='variant'><span id='Unauthorized.v' class='invisible'><code>Unauthorized</code></span></span><div class='docblock'><p>You aren&#39;t authorized to make the request. Make sure your token&#39;s scope allows you to make
+the call to the API that you would expect</p>
+</div><span id='variant.QueryLimit' class='variant'><span id='QueryLimit.v' class='invisible'><code>QueryLimit</code></span></span><div class='docblock'><p>Github puts a rate limit on API calls (you get more if you&#39;re authenticated). If that
+happens you&#39;ll get this error.</p>
+</div><span id='variant.LibIo' class='variant'><span id='LibIo.v' class='invisible'><code>LibIo(<a class='struct' href='https://doc.rust-lang.org/nightly/std/io/error/struct.Error.html' title='std::io::error::Error'>Error</a>)</code></span></span><div class='docblock'><p>While performing an IO action within the github-rs library an error occured.</p>
+</div><span id='variant.LibError' class='variant'><span id='LibError.v' class='invisible'><code>LibError</code></span></span><div class='docblock'><p>The catch all error. If it&#39;s not one of the above then something in the implementation of
+github-rs went absolutely wrong. A bug report is greatly appreciated if you encounter this error.</p>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../../github_rs/github/enum.GithubError.html' title='github_rs::github::GithubError'>GithubError</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/github_rs/error.rs.html#32' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class='method'><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></span></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Display.html' title='core::fmt::Display'>Display</a> for <a class='enum' href='../../github_rs/github/enum.GithubError.html' title='github_rs::github::GithubError'>GithubError</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/github_rs/error.rs.html#86-94' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt-1' class='method'><span id='fmt.v-1' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Display.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></span></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/std/error/trait.Error.html' title='std::error::Error'>Error</a> for <a class='enum' href='../../github_rs/github/enum.GithubError.html' title='github_rs::github::GithubError'>GithubError</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/github_rs/error.rs.html#96-125' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.description' class='method'><span id='description.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/std/error/trait.Error.html#tymethod.description' class='fnname'>description</a>(&amp;self) -&gt; &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></span></h4>
+<div class='docblock'><p>A short description of the error. <a href="https://doc.rust-lang.org/nightly/std/error/trait.Error.html#tymethod.description">Read more</a></p>
+</div><h4 id='method.cause' class='method'><span id='cause.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/std/error/trait.Error.html#method.cause' class='fnname'>cause</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a class='trait' href='https://doc.rust-lang.org/nightly/std/error/trait.Error.html' title='std::error::Error'>Error</a>&gt;</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
+<div class='docblock'><p>The lower-level cause of this error, if any. <a href="https://doc.rust-lang.org/nightly/std/error/trait.Error.html#method.cause">Read more</a></p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html' title='core::convert::From'>From</a>&lt;<a class='enum' href='../../serde_json/error/enum.Error.html' title='serde_json::error::Error'>Error</a>&gt; for <a class='enum' href='../../github_rs/github/enum.GithubError.html' title='github_rs::github::GithubError'>GithubError</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/github_rs/error.rs.html#132-141' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.from' class='method'><span id='from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(serde: <a class='enum' href='../../serde_json/error/enum.Error.html' title='serde_json::error::Error'>Error</a>) -&gt; Self</code></span></h4>
+<div class='docblock'><p>Performs the conversion.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html' title='core::convert::From'>From</a>&lt;<a class='enum' href='../../hyper/error/enum.Error.html' title='hyper::error::Error'>Error</a>&gt; for <a class='enum' href='../../github_rs/github/enum.GithubError.html' title='github_rs::github::GithubError'>GithubError</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/github_rs/error.rs.html#143-161' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.from-1' class='method'><span id='from.v-1' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html#tymethod.from' class='fnname'>from</a>(hyper: <a class='enum' href='../../hyper/error/enum.Error.html' title='hyper::error::Error'>Error</a>) -&gt; Self</code></span></h4>
+<div class='docblock'><p>Performs the conversion.</p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "github_rs";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    <script defer src="../../search-index.js"></script>
+</body>
+</html>

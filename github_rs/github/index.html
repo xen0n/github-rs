@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `github` mod in crate `github_rs`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, github">
+
+    <title>github_rs::github - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='../index.html'>github_rs</a></p><script>window.sidebarCurrent = {name: 'github', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content mod">
+<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>github_rs</a>::<wbr><a class='mod' href=''>github</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../../src/github_rs/github.rs.html#1-157' title='goto source code'>[src]</a></span></h1>
+<div class='docblock'><p>Docs for code used to access the Github API in Rust</p>
+
+<h1 id='github-reference-docs' class='section-header'><a href='#github-reference-docs'>Github Reference Docs</a></h1>
+<ul>
+<li><a href="https://developer.github.com/v3/activity">Activity</a>
+
+<ul>
+<li><a href="https://developer.github.com/v3/activity/events">Events</a></li>
+<li><a href="https://developer.github.com/v3/activity/events/types">Event Type and Payloads</a></li>
+<li><a href="https://developer.github.com/v3/activity/feeds">Feeds</a></li>
+<li><a href="https://developer.github.com/activity/starring">Starring</a></li>
+<li><a href="https://developer.github.com/activity/watching">Watching</a></li>
+</ul></li>
+<li><a href="https://developer.github.com/v3/gists">Gists</a>
+
+<ul>
+<li><a href="https://developer.github.com/v3/gists/comments">Comments</a></li>
+</ul></li>
+<li><a href="https://developer.github.com/v3/git">Git Data</a>
+
+<ul>
+<li><a href="https://developer.github.com/v3/git/blobs">Blobs</a></li>
+<li><a href="https://developer.github.com/v3/git/commits">Commits</a></li>
+<li><a href="https://developer.github.com/v3/git/refs">References</a></li>
+<li><a href="https://developer.github.com/v3/git/tags">Tags</a></li>
+<li><a href="https://developer.github.com/v3/git/trees">Trees</a></li>
+</ul></li>
+<li><a href="https://developer.github.com/v3/issues">Issues</a>
+
+<ul>
+<li><a href="https://developer.github.com/v3/issues/">Assignees</a></li>
+<li><a href="https://developer.github.com/v3/issues/">Comments</a></li>
+<li><a href="https://developer.github.com/v3/issues/">Events</a></li>
+<li><a href="https://developer.github.com/v3/issues/">Labels</a></li>
+<li><a href="https://developer.github.com/v3/issues/">Milestones</a></li>
+<li><a href="https://developer.github.com/v3/issues/">Timeline</a></li>
+</ul></li>
+<li><a href="https://developer.github.com/v3/migration">Migration</a>
+
+<ul>
+<li><a href="https://developer.github.com/v3/migration/migrations">Migrations</a></li>
+<li><a href="https://developer.github.com/v3/migration/source_imports">Source Imports</a></li>
+</ul></li>
+<li><a href="https://developer.github.com/v3/misc">Miscellaneous</a>
+
+<ul>
+<li><a href="https://developer.github.com/v3/emojis">Emojis</a></li>
+<li><a href="https://developer.github.com/v3/gitignore">Gitignore</a></li>
+<li><a href="https://developer.github.com/v3/licenses">Licenses</a></li>
+<li><a href="https://developer.github.com/v3/markdown">Markdown</a></li>
+<li><a href="https://developer.github.com/v3/meta">Meta</a></li>
+<li><a href="https://developer.github.com/v3/rate_limit">Rate Limit</a></li>
+</ul></li>
+<li><a href="https://developer.github.com/v3/orgs">Organizations</a>
+
+<ul>
+<li><a href="https://developer.github.com/v3/orgs/members">Members</a></li>
+<li><a href="https://developer.github.com/v3/orgs/teams">Teams</a></li>
+<li><a href="https://developer.github.com/v3/orgs/hooks">Webhooks</a></li>
+</ul></li>
+<li><a href="https://developer.github.com/v3/pulls">Pull Requests</a>
+
+<ul>
+<li><a href="https://developer.github.com/v3/pulls/comments">Review Comments</a></li>
+</ul></li>
+<li><a href="https://developer.github.com/v3/reactions">Reactions</a></li>
+<li><a href="https://developer.github.com/v3/repos">Repositories</a>
+
+<ul>
+<li><a href="https://developer.github.com/v3/repos/collaborators">Collaborators</a></li>
+<li><a href="https://developer.github.com/v3/repos/comments">Comments</a></li>
+<li><a href="https://developer.github.com/v3/repos/commits">Commits</a></li>
+<li><a href="https://developer.github.com/v3/repos/contents">Contents</a></li>
+<li><a href="https://developer.github.com/v3/repos/keys">Deploy Keys</a></li>
+<li><a href="https://developer.github.com/v3/repos/deployments">Deployments</a></li>
+<li><a href="https://developer.github.com/v3/repos/forks">Forks</a></li>
+<li><a href="https://developer.github.com/v3/repos/merging">Merging</a></li>
+<li><a href="https://developer.github.com/v3/repos/pages">Pages</a></li>
+<li><a href="https://developer.github.com/v3/repos/releases">Releases</a></li>
+<li><a href="https://developer.github.com/v3/repos/statistics">Statistics</a></li>
+<li><a href="https://developer.github.com/v3/repos/statuses">Statuses</a></li>
+<li><a href="https://developer.github.com/v3/repos/hooks">Webhooks</a></li>
+</ul></li>
+<li><a href="https://developer.github.com/v3/search">Search</a></li>
+<li><a href="https://developer.github.com/v3/users">Users</a>
+
+<ul>
+<li><a href="https://developer.github.com/v3/users/emails">Emails</a></li>
+<li><a href="https://developer.github.com/v3/users/followers">Followers</a></li>
+<li><a href="https://developer.github.com/v3/users/keys">SSH Keys</a></li>
+<li><a href="https://developer.github.com/v3/users/gpg_keys">GPG Keys</a></li>
+<li><a href="https://developer.github.com/v3/users/administration">Administration</a></li>
+</ul></li>
+<li><a href="https://developer.github.com/v3/enterprise">Enterprise</a>
+
+<ul>
+<li><a href="https://developer.github.com/v3/enterprise/admin_stats">Admin Stats</a></li>
+<li><a href="https://developer.github.com/v3/enterprise/ldap">LDAP</a></li>
+<li><a href="https://developer.github.com/v3/enterprise/license">License</a></li>
+<li><a href="https://developer.github.com/v3/enterprise/management_console">Management Console</a></li>
+<li><a href="https://developer.github.com/enterprise/search_indexing">Search Indexing</a></li>
+<li><a href="https://developer.github.com/enterprise/orgs">Organization Administration</a></li>
+</ul></li>
+</ul>
+
+<h1 id='design' class='section-header'><a href='#design'>Design</a></h1>
+<p>By abstracting away the code underlying the calls into a single
+struct via Traits, it makes it easy to make API calls without having
+to import all of the different modules to do it. Merely create a new
+struct and make the calls from it.</p>
+
+<p>The different traits represent all of the different
+methods available to access the API and what they do. Since all of
+them are implemented for this struct all of the methods are available
+on this page and there is no need to import any of the other files
+ever.
+While all the trait implementations and definitions reside in different files within the
+codebase itself they&#39;ve all been imported into this module. You&#39;ll be able to make any calls
+you need with the Github struct and not need to worry about trait imports or the like.</p>
+
+<h2 id='examples' class='section-header'><a href='#examples'>Examples</a></h2>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>github_rs</span>;
+<span class='comment'>// Imports trait methods and everything else automatically</span>
+<span class='kw'>use</span> <span class='ident'>github_rs</span>::<span class='ident'>github</span>::<span class='op'>*</span>;
+<span class='kw'>let</span> <span class='ident'>github</span> <span class='op'>=</span> <span class='ident'>Client</span>::<span class='ident'>new</span>(<span class='string'>&quot;Your API Token Here&quot;</span>);
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{:#?}&quot;</span>, <span class='ident'>github</span>.<span class='ident'>get_user</span>());</pre>
+</div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Actor.html'
+                                  title='github_rs::github::Actor'>Actor</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Client.html'
+                                  title='github_rs::github::Client'>Client</a></td>
+                           <td class='docblock-short'>
+                                <p>Struct used to make calls to the Github API.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Core.html'
+                                  title='github_rs::github::Core'>Core</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Email.html'
+                                  title='github_rs::github::Email'>Email</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Event.html'
+                                  title='github_rs::github::Event'>Event</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.GPGKey.html'
+                                  title='github_rs::github::GPGKey'>GPGKey</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.GPGKeyPost.html'
+                                  title='github_rs::github::GPGKeyPost'>GPGKeyPost</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.GitIgnore.html'
+                                  title='github_rs::github::GitIgnore'>GitIgnore</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Markdown.html'
+                                  title='github_rs::github::Markdown'>Markdown</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Meta.html'
+                                  title='github_rs::github::Meta'>Meta</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Org.html'
+                                  title='github_rs::github::Org'>Org</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.PatchUser.html'
+                                  title='github_rs::github::PatchUser'>PatchUser</a></td>
+                           <td class='docblock-short'>
+                                <p>Used to update an authenticated user.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Plan.html'
+                                  title='github_rs::github::Plan'>Plan</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Rate.html'
+                                  title='github_rs::github::Rate'>Rate</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.RateLimit.html'
+                                  title='github_rs::github::RateLimit'>RateLimit</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Repo.html'
+                                  title='github_rs::github::Repo'>Repo</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.RepoCreate.html'
+                                  title='github_rs::github::RepoCreate'>RepoCreate</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Resources.html'
+                                  title='github_rs::github::Resources'>Resources</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SSHKey.html'
+                                  title='github_rs::github::SSHKey'>SSHKey</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Search.html'
+                                  title='github_rs::github::Search'>Search</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.User.html'
+                                  title='github_rs::github::User'>User</a></td>
+                           <td class='docblock-short'>
+                                <p>Information related to a user on Github is stored in this struct.</p>
+                           </td>
+                       </tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.GithubError.html'
+                                  title='github_rs::github::GithubError'>GithubError</a></td>
+                           <td class='docblock-short'>
+                                <p>Errors related to improper usage of the API</p>
+                           </td>
+                       </tr></table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class='trait' href='trait.Activity.html'
+                                  title='github_rs::github::Activity'>Activity</a></td>
+                           <td class='docblock-short'>
+                                <p>Trait used to define access to endpoints grouped under <code>Activity</code> in the Github API
+specification</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='trait' href='trait.Misc.html'
+                                  title='github_rs::github::Misc'>Misc</a></td>
+                           <td class='docblock-short'>
+                                <p>Trait used to specify function hearders for endpoints grouped under Miscellaneous in the Github
+API specification</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='trait' href='trait.Repos.html'
+                                  title='github_rs::github::Repos'>Repos</a></td>
+                           <td class='docblock-short'>
+                                <p>Trait definition for endpoints grouped under <code>Repositories</code> in the Github API specification</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='trait' href='trait.Users.html'
+                                  title='github_rs::github::Users'>Users</a></td>
+                           <td class='docblock-short'>
+                                <p>Trait used to define access to endpoints grouped under <code>Users</code> in the Github API
+specification</p>
+                           </td>
+                       </tr></table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class='type' href='type.AccessToken.html'
+                                  title='github_rs::github::AccessToken'>AccessToken</a></td>
+                           <td class='docblock-short'>
+                                <p>Used to represent the access token to authenticate with the
+Github API</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='type' href='type.HTML.html'
+                                  title='github_rs::github::HTML'>HTML</a></td>
+                           <td class='docblock-short'>
+                                <p>Type used to explicitly define when we&#39;re dealing with HTML and not just JSON or any type of
+string.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='type' href='type.Http2Error.html'
+                                  title='github_rs::github::Http2Error'>Http2Error</a></td>
+                           <td class='docblock-short'>
+                                <p>Used to make it more clear that the error has to do with an underlying Http2 library and is not
+a problem with http itself</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='type' href='type.RawJSON.html'
+                                  title='github_rs::github::RawJSON'>RawJSON</a></td>
+                           <td class='docblock-short'>
+                                <p>Represents a response from the server that has not been deserialized
+by serde into the appropriate type</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='type' href='type.Result.html'
+                                  title='github_rs::github::Result'>Result</a></td>
+                           <td class='docblock-short'>
+                                <p>Result type used throughout all the endpoints to unify them all under one error type and to
+make the signature heading easier to read</p>
+                           </td>
+                       </tr></table></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "github_rs";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    <script defer src="../../search-index.js"></script>
+</body>
+</html>

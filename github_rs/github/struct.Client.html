@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `Client` struct in crate `github_rs`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, Client">
+
+    <title>github_rs::github::Client - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='../index.html'>github_rs</a>::<wbr><a href='index.html'>github</a></p><script>window.sidebarCurrent = {name: 'Client', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>github_rs</a>::<wbr><a href='index.html'>github</a>::<wbr><a class='struct' href=''>Client</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../../src/github_rs/github.rs.html#133-145' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct Client {
+    pub token: <a class='type' href='../../github_rs/github/type.AccessToken.html' title='github_rs::github::AccessToken'>AccessToken</a>,
+    pub headers: <a class='struct' href='../../hyper/header/struct.Headers.html' title='hyper::header::Headers'>Headers</a>,
+}</pre><div class='docblock'><p>Struct used to make calls to the Github API.</p>
+</div><h2 class='fields'>Fields</h2><span id='structfield.token' class='structfield'>
+                           <span id='token.v' class='invisible'>
+                           <code>token: <a class='type' href='../../github_rs/github/type.AccessToken.html' title='github_rs::github::AccessToken'>AccessToken</a></code>
+                           </span></span><span class='stab '></span><div class='docblock'><p>Token generated from <a href="https://github.com/settings/tokens">here on Github</a>
+that grants the <code>Client</code> access to various parts of the API
+depending on what is allowed with that token.</p>
+</div><span id='structfield.headers' class='structfield'>
+                           <span id='headers.v' class='invisible'>
+                           <code>headers: <a class='struct' href='../../hyper/header/struct.Headers.html' title='hyper::header::Headers'>Headers</a></code>
+                           </span></span><span class='stab '></span><div class='docblock'><p>Headers that are automatically defined and used in API Calls to the GithubAPI via
+the new function. If you wish to define your own to change how you make calls you should
+modify this variable. However, this is discouraged as the automatically created Headers
+contain the <code>Authorization</code>, API Version, Media type, and <code>UserAgent</code> headers for you.
+If you must do so it might cause undefined behavior for the API and errors encountered are
+not tested for and not the fault of the library authors</p>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../../github_rs/github/struct.Client.html' title='github_rs::github::Client'>Client</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/github_rs/github.rs.html#147-157' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.new' class='method'><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>(acc_token: <a class='type' href='../../github_rs/github/type.AccessToken.html' title='github_rs::github::AccessToken'>AccessToken</a>) -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='../../github_rs/github/struct.Client.html' title='github_rs::github::Client'>Client</a>&gt;</code></span></h4>
+<div class='docblock'><p>Generate a new Client struct with the access token so that
+calls can be made to the API using it</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='../../github_rs/github/trait.Activity.html' title='github_rs::github::Activity'>Activity</a> for <a class='struct' href='../../github_rs/github/struct.Client.html' title='github_rs::github::Client'>Client</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/github_rs/activity.rs.html#97-262' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.get_events' class='method'><span id='get_events.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Activity.html#tymethod.get_events' class='fnname'>get_events</a>(&amp;self) -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../github_rs/github/struct.Event.html' title='github_rs::github::Event'>Event</a>&gt;&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type' class='section-header'><a href='#request-type'>Request Type:</a></h3>
+<p><code>GET</code></p>
+
+<h3 id='endpoint' class='section-header'><a href='#endpoint'>Endpoint:</a></h3>
+<p>/events</p>
+
+<h3 id='description' class='section-header'><a href='#description'>Description</a></h3>
+<p>Returns a vector of recent <code>Event</code>s from the API</p>
+</div><h4 id='method.get_repos_owner_repo_events' class='method'><span id='get_repos_owner_repo_events.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Activity.html#tymethod.get_repos_owner_repo_events' class='fnname'>get_repos_owner_repo_events</a>(&amp;self,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; owner: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; repo: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../github_rs/github/struct.Event.html' title='github_rs::github::Event'>Event</a>&gt;&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-1' class='section-header'><a href='#request-type-1'>Request Type:</a></h3>
+<p><code>GET</code></p>
+
+<h3 id='endpoint-1' class='section-header'><a href='#endpoint-1'>Endpoint:</a></h3>
+<p>/repos/:owner/:repo/events</p>
+
+<h3 id='description-1' class='section-header'><a href='#description-1'>Description</a></h3>
+<p>Returns a vector of <code>Event</code>s from the repo of a given owner</p>
+</div><h4 id='method.get_repos_owner_repo_issues_events' class='method'><span id='get_repos_owner_repo_issues_events.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Activity.html#tymethod.get_repos_owner_repo_issues_events' class='fnname'>get_repos_owner_repo_issues_events</a>(&amp;self,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; owner: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; repo: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../github_rs/github/struct.Event.html' title='github_rs::github::Event'>Event</a>&gt;&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-2' class='section-header'><a href='#request-type-2'>Request Type:</a></h3>
+<p><code>GET</code></p>
+
+<h3 id='endpoint-2' class='section-header'><a href='#endpoint-2'>Endpoint:</a></h3>
+<p>/repos/:owner/:repo/issues/events</p>
+
+<h3 id='description-2' class='section-header'><a href='#description-2'>Description</a></h3>
+<p>Returns a vector of <code>Event</code>s from the issues of a repo of a given owner</p>
+</div><h4 id='method.get_networks_owner_repo_events' class='method'><span id='get_networks_owner_repo_events.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Activity.html#tymethod.get_networks_owner_repo_events' class='fnname'>get_networks_owner_repo_events</a>(&amp;self,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; owner: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; repo: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../github_rs/github/struct.Event.html' title='github_rs::github::Event'>Event</a>&gt;&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-3' class='section-header'><a href='#request-type-3'>Request Type:</a></h3>
+<p><code>GET</code></p>
+
+<h3 id='endpoint-3' class='section-header'><a href='#endpoint-3'>Endpoint:</a></h3>
+<p>/networks/:owner/:repo/events</p>
+
+<h3 id='description-3' class='section-header'><a href='#description-3'>Description</a></h3>
+<p>Returns a vector of <code>Event</code>s from the network of a repo of a given owner</p>
+</div><h4 id='method.get_orgs_org_events' class='method'><span id='get_orgs_org_events.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Activity.html#tymethod.get_orgs_org_events' class='fnname'>get_orgs_org_events</a>(&amp;self, org: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../github_rs/github/struct.Event.html' title='github_rs::github::Event'>Event</a>&gt;&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-4' class='section-header'><a href='#request-type-4'>Request Type:</a></h3>
+<p><code>GET</code></p>
+
+<h3 id='endpoint-4' class='section-header'><a href='#endpoint-4'>Endpoint:</a></h3>
+<p>/orgs/:org/events</p>
+
+<h3 id='description-4' class='section-header'><a href='#description-4'>Description</a></h3>
+<p>Returns a vector of <code>Event</code>s from a given organization</p>
+</div><h4 id='method.get_users_username_received_events' class='method'><span id='get_users_username_received_events.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Activity.html#tymethod.get_users_username_received_events' class='fnname'>get_users_username_received_events</a>(&amp;self,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; username: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../github_rs/github/struct.Event.html' title='github_rs::github::Event'>Event</a>&gt;&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-5' class='section-header'><a href='#request-type-5'>Request Type:</a></h3>
+<p><code>GET</code></p>
+
+<h3 id='endpoint-5' class='section-header'><a href='#endpoint-5'>Endpoint:</a></h3>
+<p>/users/:username/received_events</p>
+
+<h3 id='description-5' class='section-header'><a href='#description-5'>Description</a></h3>
+<p>Returns a vector of <code>Event</code>s the username has received. If you are authenticated and use
+your own username you will see private <code>Event</code>s</p>
+</div><h4 id='method.get_users_username_received_events_public' class='method'><span id='get_users_username_received_events_public.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Activity.html#tymethod.get_users_username_received_events_public' class='fnname'>get_users_username_received_events_public</a>(&amp;self,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; username: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../github_rs/github/struct.Event.html' title='github_rs::github::Event'>Event</a>&gt;&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-6' class='section-header'><a href='#request-type-6'>Request Type:</a></h3>
+<p><code>GET</code></p>
+
+<h3 id='endpoint-6' class='section-header'><a href='#endpoint-6'>Endpoint:</a></h3>
+<p>/users/:username/received_events/public</p>
+
+<h3 id='description-6' class='section-header'><a href='#description-6'>Description</a></h3>
+<p>Returns a vector of public <code>Event</code>s the username has received.</p>
+</div><h4 id='method.get_users_username_events' class='method'><span id='get_users_username_events.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Activity.html#tymethod.get_users_username_events' class='fnname'>get_users_username_events</a>(&amp;self, username: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../github_rs/github/struct.Event.html' title='github_rs::github::Event'>Event</a>&gt;&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-7' class='section-header'><a href='#request-type-7'>Request Type:</a></h3>
+<p><code>GET</code></p>
+
+<h3 id='endpoint-7' class='section-header'><a href='#endpoint-7'>Endpoint:</a></h3>
+<p>/users/:username/events</p>
+
+<h3 id='description-7' class='section-header'><a href='#description-7'>Description</a></h3>
+<p>Returns a vector of <code>Event</code>s performed by the username. If you are authenticated and use
+your own username you will see private <code>Event</code>s</p>
+</div><h4 id='method.get_users_username_events_public' class='method'><span id='get_users_username_events_public.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Activity.html#tymethod.get_users_username_events_public' class='fnname'>get_users_username_events_public</a>(&amp;self, username: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../github_rs/github/struct.Event.html' title='github_rs::github::Event'>Event</a>&gt;&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-8' class='section-header'><a href='#request-type-8'>Request Type:</a></h3>
+<p><code>GET</code></p>
+
+<h3 id='endpoint-8' class='section-header'><a href='#endpoint-8'>Endpoint:</a></h3>
+<p>/users/:username/events/public</p>
+
+<h3 id='description-8' class='section-header'><a href='#description-8'>Description</a></h3>
+<p>Returns a vector of <code>Event</code>s performed by the username. If you are authenticated and use
+your own username you will see private <code>Event</code>s</p>
+</div><h4 id='method.get_users_username_events_orgs_org' class='method'><span id='get_users_username_events_orgs_org.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Activity.html#tymethod.get_users_username_events_orgs_org' class='fnname'>get_users_username_events_orgs_org</a>(&amp;self,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; username: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; org: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../github_rs/github/struct.Event.html' title='github_rs::github::Event'>Event</a>&gt;&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-9' class='section-header'><a href='#request-type-9'>Request Type:</a></h3>
+<p><code>GET</code></p>
+
+<h3 id='endpoint-9' class='section-header'><a href='#endpoint-9'>Endpoint:</a></h3>
+<p>/users/:username/events/orgs/:org</p>
+
+<h3 id='description-9' class='section-header'><a href='#description-9'>Description</a></h3>
+<p>Returns a vector of <code>Event</code>s from the username&#39;s org. You must be authenticated to view
+this.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../../github_rs/github/struct.Client.html' title='github_rs::github::Client'>Client</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/github_rs/github.rs.html#132' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class='method'><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></span></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../../github_rs/github/struct.Client.html' title='github_rs::github::Client'>Client</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/github_rs/github.rs.html#132' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.clone' class='method'><span id='clone.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../../github_rs/github/struct.Client.html' title='github_rs::github::Client'>Client</a></code></span></h4>
+<div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
+</div><h4 id='method.clone_from' class='method'><span id='clone_from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
+<div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='../../github_rs/github/trait.Misc.html' title='github_rs::github::Misc'>Misc</a> for <a class='struct' href='../../github_rs/github/struct.Client.html' title='github_rs::github::Client'>Client</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/github_rs/miscellaneous.rs.html#73-167' title='goto source code'>[src]</a></span></h3>
+<div class='docblock'><p>Implementation of the <code>Misc</code> trait for the <code>Client</code></p>
+</div><div class='impl-items'><h4 id='method.get_meta' class='method'><span id='get_meta.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Misc.html#tymethod.get_meta' class='fnname'>get_meta</a>(&amp;self) -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='../../github_rs/github/struct.Meta.html' title='github_rs::github::Meta'>Meta</a>&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-10' class='section-header'><a href='#request-type-10'>Request Type:</a></h3>
+<p><code>GET</code></p>
+
+<h3 id='endpoint-10' class='section-header'><a href='#endpoint-10'>Endpoint:</a></h3>
+<p>/meta</p>
+
+<h3 id='description-10' class='section-header'><a href='#description-10'>Description</a></h3>
+<p>Returns a <code>Meta</code> struct which contains information about the Github service</p>
+</div><h4 id='method.get_rate_limit' class='method'><span id='get_rate_limit.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Misc.html#tymethod.get_rate_limit' class='fnname'>get_rate_limit</a>(&amp;self) -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='../../github_rs/github/struct.RateLimit.html' title='github_rs::github::RateLimit'>RateLimit</a>&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-11' class='section-header'><a href='#request-type-11'>Request Type:</a></h3>
+<p><code>GET</code></p>
+
+<h3 id='endpoint-11' class='section-header'><a href='#endpoint-11'>Endpoint:</a></h3>
+<p>/rate_limit</p>
+
+<h3 id='description-11' class='section-header'><a href='#description-11'>Description</a></h3>
+<p>Returns a RateLimit struct to allow the user to know how many requests they can still make.
+Note hiting this endpoint with a request does not count against that limit.</p>
+</div><h4 id='method.get_gitignore_templates' class='method'><span id='get_gitignore_templates.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Misc.html#tymethod.get_gitignore_templates' class='fnname'>get_gitignore_templates</a>(&amp;self) -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-12' class='section-header'><a href='#request-type-12'>Request Type:</a></h3>
+<p>GET</p>
+
+<h3 id='endpoint-12' class='section-header'><a href='#endpoint-12'>Endpoint:</a></h3>
+<p>/gitignore/templates</p>
+
+<h3 id='description-12' class='section-header'><a href='#description-12'>Description</a></h3>
+<p>Returns a vector of the languages that have gitignore templates on Github.</p>
+</div><h4 id='method.get_gitignore_templates_lang' class='method'><span id='get_gitignore_templates_lang.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Misc.html#tymethod.get_gitignore_templates_lang' class='fnname'>get_gitignore_templates_lang</a>(&amp;self, lang: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='../../github_rs/github/struct.GitIgnore.html' title='github_rs::github::GitIgnore'>GitIgnore</a>&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-13' class='section-header'><a href='#request-type-13'>Request Type:</a></h3>
+<p><code>GET</code></p>
+
+<h3 id='endpoint-13' class='section-header'><a href='#endpoint-13'>Endpoint:</a></h3>
+<p>/gitignore/templates/:lang</p>
+
+<h3 id='description-13' class='section-header'><a href='#description-13'>Description</a></h3>
+<p>Returns a <code>GitIgnore</code> struct that has the string for the gitignore file and the language as
+part of it.</p>
+</div><h4 id='method.post_markdown' class='method'><span id='post_markdown.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Misc.html#tymethod.post_markdown' class='fnname'>post_markdown</a>(&amp;self, data: <a class='struct' href='../../github_rs/github/struct.Markdown.html' title='github_rs::github::Markdown'>Markdown</a>) -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='type' href='../../github_rs/github/type.HTML.html' title='github_rs::github::HTML'>HTML</a>&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-14' class='section-header'><a href='#request-type-14'>Request Type:</a></h3>
+<p><code>POST</code></p>
+
+<h3 id='endpoint-14' class='section-header'><a href='#endpoint-14'>Endpoint:</a></h3>
+<p>/markdown</p>
+
+<h3 id='description-14' class='section-header'><a href='#description-14'>Description</a></h3>
+<p>Returns a rendered version of the <code>Markdown</code> sent to Github as <code>HTML</code>.</p>
+</div><h4 id='method.post_markdown_raw' class='method'><span id='post_markdown_raw.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Misc.html#tymethod.post_markdown_raw' class='fnname'>post_markdown_raw</a>(&amp;self, data: <a class='struct' href='../../github_rs/github/struct.Markdown.html' title='github_rs::github::Markdown'>Markdown</a>) -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='type' href='../../github_rs/github/type.HTML.html' title='github_rs::github::HTML'>HTML</a>&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-15' class='section-header'><a href='#request-type-15'>Request Type:</a></h3>
+<p><code>POST</code></p>
+
+<h3 id='endpoint-15' class='section-header'><a href='#endpoint-15'>Endpoint:</a></h3>
+<p>/markdown/raw</p>
+
+<h3 id='description-15' class='section-header'><a href='#description-15'>Description</a></h3>
+<p>Returns a rendered version of the markdown posted to it. This expects the request to not be
+JSON so right now this function is broken until it can be updated to work properly.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='../../github_rs/github/trait.Repos.html' title='github_rs::github::Repos'>Repos</a> for <a class='struct' href='../../github_rs/github/struct.Client.html' title='github_rs::github::Client'>Client</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/github_rs/repositories.rs.html#29-57' title='goto source code'>[src]</a></span></h3>
+<div class='docblock'><p>Implementation of the Repos trait for the <code>Client</code></p>
+</div><div class='impl-items'><h4 id='method.post_org_repos' class='method'><span id='post_org_repos.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Repos.html#tymethod.post_org_repos' class='fnname'>post_org_repos</a>(&amp;self, organization: <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>, repo: <a class='struct' href='../../github_rs/github/struct.RepoCreate.html' title='github_rs::github::RepoCreate'>RepoCreate</a>) -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='../../github_rs/github/struct.Repo.html' title='github_rs::github::Repo'>Repo</a>&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-16' class='section-header'><a href='#request-type-16'>Request Type:</a></h3>
+<p><code>POST</code></p>
+
+<h3 id='endpoint-16' class='section-header'><a href='#endpoint-16'>Endpoint:</a></h3>
+<p>/orgs/:org/repos</p>
+
+<h3 id='description-16' class='section-header'><a href='#description-16'>Description</a></h3>
+<p>Creates a new repo in the specified organization for the authenticated user and returns the new <code>Repo</code>s stats</p>
+</div><h4 id='method.post_user_repos' class='method'><span id='post_user_repos.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Repos.html#tymethod.post_user_repos' class='fnname'>post_user_repos</a>(&amp;self, repo: <a class='struct' href='../../github_rs/github/struct.RepoCreate.html' title='github_rs::github::RepoCreate'>RepoCreate</a>) -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='../../github_rs/github/struct.Repo.html' title='github_rs::github::Repo'>Repo</a>&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-17' class='section-header'><a href='#request-type-17'>Request Type:</a></h3>
+<p><code>POST</code></p>
+
+<h3 id='endpoint-17' class='section-header'><a href='#endpoint-17'>Endpoint:</a></h3>
+<p>/user/repos</p>
+
+<h3 id='description-17' class='section-header'><a href='#description-17'>Description</a></h3>
+<p>Creates a new repo for the authenticated user and returns the new <code>Repo</code>s stats</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='../../github_rs/github/trait.Users.html' title='github_rs::github::Users'>Users</a> for <a class='struct' href='../../github_rs/github/struct.Client.html' title='github_rs::github::Client'>Client</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/github_rs/users.rs.html#225-542' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.get_user' class='method'><span id='get_user.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Users.html#tymethod.get_user' class='fnname'>get_user</a>(&amp;self) -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='../../github_rs/github/struct.User.html' title='github_rs::github::User'>User</a>&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-18' class='section-header'><a href='#request-type-18'>Request Type:</a></h3>
+<p><code>GET</code></p>
+
+<h3 id='endpoint-18' class='section-header'><a href='#endpoint-18'>Endpoint:</a></h3>
+<p>/user</p>
+
+<h3 id='description-18' class='section-header'><a href='#description-18'>Description</a></h3>
+<p>Returns a <code>User</code> Struct for the authenticated user.</p>
+</div><h4 id='method.get_users_username' class='method'><span id='get_users_username.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Users.html#tymethod.get_users_username' class='fnname'>get_users_username</a>(&amp;self, username: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='../../github_rs/github/struct.User.html' title='github_rs::github::User'>User</a>&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-19' class='section-header'><a href='#request-type-19'>Request Type:</a></h3>
+<p><code>GET</code></p>
+
+<h3 id='endpoint-19' class='section-header'><a href='#endpoint-19'>Endpoint:</a></h3>
+<p>/users/:username</p>
+
+<h3 id='description-19' class='section-header'><a href='#description-19'>Description</a></h3>
+<p>Returns a <code>User</code> Struct for the person whose name is passed into the function</p>
+</div><h4 id='method.get_users' class='method'><span id='get_users.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Users.html#tymethod.get_users' class='fnname'>get_users</a>(&amp;self,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; user_id: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; per_page: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../github_rs/github/struct.User.html' title='github_rs::github::User'>User</a>&gt;&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-20' class='section-header'><a href='#request-type-20'>Request Type:</a></h3>
+<p><code>GET</code></p>
+
+<h3 id='endpoint-20' class='section-header'><a href='#endpoint-20'>Endpoint:</a></h3>
+<p>/users</p>
+
+<h3 id='description-20' class='section-header'><a href='#description-20'>Description</a></h3>
+<p>Returns a vector of <code>User</code>s from the website. This is a paginated request to the endpoint.</p>
+</div><h4 id='method.get_user_emails' class='method'><span id='get_user_emails.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Users.html#tymethod.get_user_emails' class='fnname'>get_user_emails</a>(&amp;self,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; page_num: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; per_page: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../github_rs/github/struct.Email.html' title='github_rs::github::Email'>Email</a>&gt;&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-21' class='section-header'><a href='#request-type-21'>Request Type:</a></h3>
+<p><code>GET</code></p>
+
+<h3 id='endpoint-21' class='section-header'><a href='#endpoint-21'>Endpoint:</a></h3>
+<p>/user/emails</p>
+
+<h3 id='description-21' class='section-header'><a href='#description-21'>Description</a></h3>
+<p>Returns a vector of <code>Email</code>s of the authenticated user. This is a paginated request to the
+endpoint.</p>
+</div><h4 id='method.get_users_username_followers' class='method'><span id='get_users_username_followers.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Users.html#tymethod.get_users_username_followers' class='fnname'>get_users_username_followers</a>(&amp;self,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; username: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; page_num: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; per_page: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../github_rs/github/struct.User.html' title='github_rs::github::User'>User</a>&gt;&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-22' class='section-header'><a href='#request-type-22'>Request Type:</a></h3>
+<p><code>GET</code></p>
+
+<h3 id='endpoint-22' class='section-header'><a href='#endpoint-22'>Endpoint:</a></h3>
+<p>/users/:username/followers</p>
+
+<h3 id='description-22' class='section-header'><a href='#description-22'>Description</a></h3>
+<p>Returns a vector of <code>User</code>s following the username passed into the function. This is a
+paginated request to the endpoint.</p>
+</div><h4 id='method.get_user_followers' class='method'><span id='get_user_followers.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Users.html#tymethod.get_user_followers' class='fnname'>get_user_followers</a>(&amp;self,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; page_num: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; per_page: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../github_rs/github/struct.User.html' title='github_rs::github::User'>User</a>&gt;&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-23' class='section-header'><a href='#request-type-23'>Request Type:</a></h3>
+<p><code>GET</code></p>
+
+<h3 id='endpoint-23' class='section-header'><a href='#endpoint-23'>Endpoint:</a></h3>
+<p>/user/followers</p>
+
+<h3 id='description-23' class='section-header'><a href='#description-23'>Description</a></h3>
+<p>Returns a vector of <code>User</code>s followin the authenticated user. This is a paginated request
+to the endpoint.</p>
+</div><h4 id='method.get_users_username_following' class='method'><span id='get_users_username_following.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Users.html#tymethod.get_users_username_following' class='fnname'>get_users_username_following</a>(&amp;self,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; username: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; page_num: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; per_page: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../github_rs/github/struct.User.html' title='github_rs::github::User'>User</a>&gt;&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-24' class='section-header'><a href='#request-type-24'>Request Type:</a></h3>
+<p><code>GET</code></p>
+
+<h3 id='endpoint-24' class='section-header'><a href='#endpoint-24'>Endpoint:</a></h3>
+<p>/users/:username/following</p>
+
+<h3 id='description-24' class='section-header'><a href='#description-24'>Description</a></h3>
+<p>Returns a vector of <code>User</code>s that the given username is following. This is a paginated
+request to the endpoint.</p>
+</div><h4 id='method.get_user_following' class='method'><span id='get_user_following.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Users.html#tymethod.get_user_following' class='fnname'>get_user_following</a>(&amp;self,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; page_num: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; per_page: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../github_rs/github/struct.User.html' title='github_rs::github::User'>User</a>&gt;&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-25' class='section-header'><a href='#request-type-25'>Request Type:</a></h3>
+<p><code>GET</code></p>
+
+<h3 id='endpoint-25' class='section-header'><a href='#endpoint-25'>Endpoint:</a></h3>
+<p>/user/following</p>
+
+<h3 id='description-25' class='section-header'><a href='#description-25'>Description</a></h3>
+<p>Returns a vector of all <code>User</code>s the authenticated user is following. This is a paginated
+request to the endpoint.</p>
+</div><h4 id='method.patch_user' class='method'><span id='patch_user.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Users.html#tymethod.patch_user' class='fnname'>patch_user</a>(&amp;self, user: <a class='struct' href='../../github_rs/github/struct.PatchUser.html' title='github_rs::github::PatchUser'>PatchUser</a>) -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='../../github_rs/github/struct.User.html' title='github_rs::github::User'>User</a>&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-26' class='section-header'><a href='#request-type-26'>Request Type:</a></h3>
+<p><code>PATCH</code></p>
+
+<h3 id='endpoint-26' class='section-header'><a href='#endpoint-26'>Endpoint:</a></h3>
+<p>/user</p>
+
+<h3 id='description-26' class='section-header'><a href='#description-26'>Description</a></h3>
+<p>Returns a <code>User</code> struct of the authenticated user once their data has been updated</p>
+</div><h4 id='method.post_user_emails' class='method'><span id='post_user_emails.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Users.html#tymethod.post_user_emails' class='fnname'>post_user_emails</a>(&amp;self, emails: <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;) -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../github_rs/github/struct.Email.html' title='github_rs::github::Email'>Email</a>&gt;&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-27' class='section-header'><a href='#request-type-27'>Request Type:</a></h3>
+<p><code>POST</code></p>
+
+<h3 id='endpoint-27' class='section-header'><a href='#endpoint-27'>Endpoint:</a></h3>
+<p>/user/emails</p>
+
+<h3 id='description-27' class='section-header'><a href='#description-27'>Description</a></h3>
+<p>Returns a vector of <code>Email</code>s when they&#39;ve been added to the user&#39;s profile</p>
+</div><h4 id='method.put_user_following_username' class='method'><span id='put_user_following_username.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Users.html#tymethod.put_user_following_username' class='fnname'>put_user_following_username</a>(&amp;self, username: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-28' class='section-header'><a href='#request-type-28'>Request Type:</a></h3>
+<p><code>PUT</code></p>
+
+<h3 id='endpoint-28' class='section-header'><a href='#endpoint-28'>Endpoint:</a></h3>
+<p>/user/following/:username</p>
+
+<h3 id='description-28' class='section-header'><a href='#description-28'>Description</a></h3>
+<p>Returns true is the user is now following the given username and false otherwise</p>
+</div><h4 id='method.delete_user_following_username' class='method'><span id='delete_user_following_username.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Users.html#tymethod.delete_user_following_username' class='fnname'>delete_user_following_username</a>(&amp;self, username: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-29' class='section-header'><a href='#request-type-29'>Request Type:</a></h3>
+<p><code>DELETE</code></p>
+
+<h3 id='endpoint-29' class='section-header'><a href='#endpoint-29'>Endpoint:</a></h3>
+<p>/user/following/:username</p>
+
+<h3 id='description-29' class='section-header'><a href='#description-29'>Description</a></h3>
+<p>Returns true if the authenticated user unfollowed the username passed in and false
+otherwise.</p>
+</div><h4 id='method.get_user_following_username' class='method'><span id='get_user_following_username.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Users.html#tymethod.get_user_following_username' class='fnname'>get_user_following_username</a>(&amp;self, username: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-30' class='section-header'><a href='#request-type-30'>Request Type:</a></h3>
+<p><code>GET</code></p>
+
+<h3 id='endpoint-30' class='section-header'><a href='#endpoint-30'>Endpoint:</a></h3>
+<p>/user/following/:username</p>
+
+<h3 id='description-30' class='section-header'><a href='#description-30'>Description</a></h3>
+<p>Returns true if the authenticated user is following the username passed to the function and
+false otherwise.</p>
+</div><h4 id='method.get_users_username_following_target_user' class='method'><span id='get_users_username_following_target_user.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Users.html#tymethod.get_users_username_following_target_user' class='fnname'>get_users_username_following_target_user</a>(&amp;self,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; username: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; target_user: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-31' class='section-header'><a href='#request-type-31'>Request Type:</a></h3>
+<p><code>GET</code></p>
+
+<h3 id='endpoint-31' class='section-header'><a href='#endpoint-31'>Endpoint:</a></h3>
+<p>/users/:username/following/:target_user</p>
+
+<h3 id='description-31' class='section-header'><a href='#description-31'>Description</a></h3>
+<p>Returns true is the username is following the target user and false otherwise.</p>
+</div><h4 id='method.get_users_username_keys' class='method'><span id='get_users_username_keys.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Users.html#tymethod.get_users_username_keys' class='fnname'>get_users_username_keys</a>(&amp;self, username: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../github_rs/github/struct.SSHKey.html' title='github_rs::github::SSHKey'>SSHKey</a>&gt;&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-32' class='section-header'><a href='#request-type-32'>Request Type:</a></h3>
+<p><code>GET</code></p>
+
+<h3 id='endpoint-32' class='section-header'><a href='#endpoint-32'>Endpoint:</a></h3>
+<p>/users/:username/keys</p>
+
+<h3 id='description-32' class='section-header'><a href='#description-32'>Description</a></h3>
+<p>Returns a Vector of all <code>SSHKeys</code> from the username specified</p>
+</div><h4 id='method.get_user_keys' class='method'><span id='get_user_keys.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Users.html#tymethod.get_user_keys' class='fnname'>get_user_keys</a>(&amp;self) -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../github_rs/github/struct.SSHKey.html' title='github_rs::github::SSHKey'>SSHKey</a>&gt;&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-33' class='section-header'><a href='#request-type-33'>Request Type:</a></h3>
+<p><code>GET</code></p>
+
+<h3 id='endpoint-33' class='section-header'><a href='#endpoint-33'>Endpoint:</a></h3>
+<p>/user/keys</p>
+
+<h3 id='description-33' class='section-header'><a href='#description-33'>Description</a></h3>
+<p>Returns a Vector of all <code>SSHKey</code>s that the authenticate user might have.</p>
+</div><h4 id='method.get_user_keys_id' class='method'><span id='get_user_keys_id.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Users.html#tymethod.get_user_keys_id' class='fnname'>get_user_keys_id</a>(&amp;self, id: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../../github_rs/github/struct.SSHKey.html' title='github_rs::github::SSHKey'>SSHKey</a>&gt;&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-34' class='section-header'><a href='#request-type-34'>Request Type:</a></h3>
+<p><code>GET</code></p>
+
+<h3 id='endpoint-34' class='section-header'><a href='#endpoint-34'>Endpoint:</a></h3>
+<p>/user/keys/:id</p>
+
+<h3 id='description-34' class='section-header'><a href='#description-34'>Description</a></h3>
+<p>Returns an <code>SSHKey</code> to the user that is specified by id. If it does not exist a None value
+is returned.</p>
+</div><h4 id='method.post_user_keys' class='method'><span id='post_user_keys.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Users.html#tymethod.post_user_keys' class='fnname'>post_user_keys</a>(&amp;self, new_key: <a class='struct' href='../../github_rs/github/struct.SSHKey.html' title='github_rs::github::SSHKey'>SSHKey</a>) -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='struct' href='../../github_rs/github/struct.SSHKey.html' title='github_rs::github::SSHKey'>SSHKey</a>&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-35' class='section-header'><a href='#request-type-35'>Request Type:</a></h3>
+<p><code>POST</code></p>
+
+<h3 id='endpoint-35' class='section-header'><a href='#endpoint-35'>Endpoint:</a></h3>
+<p>/user/keys</p>
+
+<h3 id='description-35' class='section-header'><a href='#description-35'>Description</a></h3>
+<p>Creates a new SSH key sending it back if it worked out properly.</p>
+</div><h4 id='method.delete_user_keys' class='method'><span id='delete_user_keys.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Users.html#tymethod.delete_user_keys' class='fnname'>delete_user_keys</a>(&amp;self, id: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-36' class='section-header'><a href='#request-type-36'>Request Type:</a></h3>
+<p><code>DELETE</code></p>
+
+<h3 id='endpoint-36' class='section-header'><a href='#endpoint-36'>Endpoint:</a></h3>
+<p>/user/keys</p>
+
+<h3 id='description-36' class='section-header'><a href='#description-36'>Description</a></h3>
+<p>Returns a boolean value. True is the ssh key was deleted and false otherwise. The id number
+of the key is what is used to determine which one to delete.</p>
+</div><h4 id='method.delete_user_emails' class='method'><span id='delete_user_emails.v' class='invisible'><code>fn <a href='../../github_rs/github/trait.Users.html#tymethod.delete_user_emails' class='fnname'>delete_user_emails</a>(&amp;self, emails: <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;) -&gt; <a class='type' href='../../github_rs/github/type.Result.html' title='github_rs::github::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>&gt;</code></span></h4>
+<div class='docblock'>
+<h3 id='request-type-37' class='section-header'><a href='#request-type-37'>Request Type:</a></h3>
+<p><code>DELETE</code></p>
+
+<h3 id='endpoint-37' class='section-header'><a href='#endpoint-37'>Endpoint:</a></h3>
+<p>/user/emails</p>
+
+<h3 id='description-37' class='section-header'><a href='#description-37'>Description</a></h3>
+<p>Returns a boolean value. True if the email(s) were deleted and false otherwise. The email
+strings must match verbatim for the corresponding email to be deleted.</p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "github_rs";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    <script defer src="../../search-index.js"></script>
+</body>
+</html>
