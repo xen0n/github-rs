@@ -2,19 +2,38 @@ branches:
   except:
     - gh_pages
 environment:
+  SSL_CERT_FILE: "C:\\OpenSSL\\cacert.pem"
   matrix:
-  - TARGET: x86_64-pc-windows-msvc
-  - TARGET: i686-pc-windows-msvc
-  - TARGET: i686-pc-windows-gnu
+    - TARGET: i686-pc-windows-gnu
+      BITS: 32
+      MSYS2: 1
+      OPENSSL_VERSION: 1_1_0c
+    - TARGET: x86_64-pc-windows-gnu
+      BITS: 64
+      MSYS2: 1
+      OPENSSL_VERSION: 1_0_2j
 install:
-  - ps: Start-FileDownload "https://static.rust-lang.org/dist/rust-nightly-${env:TARGET}.exe"
-  - rust-nightly-%TARGET%.exe /VERYSILENT /NORESTART /DIR="C:\Program Files (x86)\Rust"
-  - SET PATH=%PATH%;C:\Program Files (x86)\Rust\bin
-  - SET PATH=%PATH%;C:\MinGW\bin
+  # install OpenSSL
+  - ps: Start-FileDownload "http://slproweb.com/download/Win${env:BITS}OpenSSL-${env:OPENSSL_VERSION}.exe"
+  - Win%BITS%OpenSSL-%OPENSSL_VERSION%.exe /SILENT /VERYSILENT /SP- /DIR="C:\OpenSSL"
+  - ps: Start-FileDownload "https://curl.haxx.se/ca/cacert.pem" -FileName "C:\OpenSSL\cacert.pem"
+
+  # Install Rust
+  - curl -sSf -o rustup-init.exe https://win.rustup.rs/
+  - rustup-init.exe -y --default-toolchain=nightly-%TARGET%
+  - set PATH=%PATH%;C:\Users\appveyor\.cargo\bin
+  - if defined MSYS2 set PATH=C:\msys64\mingw%BITS%\bin;%PATH%
   - rustc -V
   - cargo -V
 
 build: false
 
 test_script:
-  - cargo build --verbose
+  - cargo build
+  # There's some problems with windows for this so it's commented out
+  # for now
+  #- cargo test
+
+cache:
+  - target
+  - C:\Users\appveyor\.cargo\registry
