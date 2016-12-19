@@ -6,7 +6,7 @@
 | DependencyCI | [![DependencyStatus](https://dependencyci.com/github/mgattozzi/github-rs/badge)](https://dependencyci.com/github/mgattozzi/github-rs)   |
 | AppveyorCI   | [![Build status](https://ci.appveyor.com/api/projects/status/st04a7hltt8h42lq?svg=true)](https://ci.appveyor.com/project/mgattozzi/github-rs)       |
 | CodeCov   | [![codecov](https://codecov.io/gh/mgattozzi/github-rs/branch/master/graph/badge.svg)](https://codecov.io/gh/mgattozzi/github-rs)      |
-
+| crates.io | ![crates.io](https://img.shields.io/crates/v/github-rs.svg)
 
 Pure Rust bindings to the Github API using Hyper and Serde
 
