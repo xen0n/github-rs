@@ -43,7 +43,7 @@ pub enum MediaType {
     Base64
 }
 
-/// Change a MediaType into it's coresponding Mime type for requests
+/// Change a `MediaType` into it's coresponding Mime type for requests
 pub fn media_to_mime(media: MediaType) -> Result<Mime> {
     match media {
         // try_mime unwraps the value like try but converts to a github

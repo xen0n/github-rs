@@ -1,5 +1,5 @@
 //! Library to used to access the Github API with Rust
-#![feature(custom_derive, proc_macro)]
+#![feature(custom_derive, proc_macro, plugin)]
 #![cfg_attr(feature = "dev", plugin(clippy))]
 // This allows for better enforc
 // unstable_features add one day when custom derive is stableed style and project features
