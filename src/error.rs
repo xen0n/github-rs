@@ -1,5 +1,4 @@
 // We only are using thses crates to transform Hyper errors
-use solicit::http::HttpError;
 use url::ParseError;
 
 // Imports from crates used elsewhere and the standard library
@@ -18,9 +17,6 @@ use std::str::Utf8Error;
 /// Result type used throughout all the endpoints to unify them all under one error type and to
 /// make the signature heading easier to read
 pub type Result<T> = result::Result<T, GithubError>;
-/// Used to make it more clear that the error has to do with an underlying Http2 library and is not
-/// a problem with http itself
-pub type Http2Error = HttpError;
 
 // -----------------------------------------------------------------------------------------//
 //                             GITHUB ERROR IMPLEMENTATION                                 //
@@ -58,8 +54,6 @@ pub enum GithubError {
     /// While intitiating, in the process of, or while terminating an SSL connection with the API
     /// an error occurred.
     RequestSsl(Box<error::Error + Send + Sync>),
-    /// While attemptin to make a connection via Http2 an error occured
-    RequestHttp2(Http2Error),
     /// An error within the byte string for the request to the API occured
     RequestUtf8(Utf8Error),
     /// Encountered if whatever was returned was not at all JSON
@@ -108,7 +102,6 @@ impl error::Error for GithubError {
             RequestTooLarge => "Request payload is too big to work",
             RequestStatus => "Status Code returned was not a valid code",
             RequestSsl(..) => "While performing SSL actions with the request an error occurred",
-            RequestHttp2(ref err) => error::Error::description(err),
             RequestUtf8(ref err) => error::Error::description(err),
             Request => "Something went wrong while connecting. We are unsure what the problem is.",
             // Github-rs Specific Errors not due to other libraries
@@ -156,7 +149,6 @@ impl From<hyperErr::Error> for GithubError {
             Status => RequestStatus,
             Io(err) => RequestIo(err),
             Ssl(err) => RequestSsl(err),
-            Http2(err) => RequestHttp2(err),
             Utf8(err) => RequestUtf8(err),
             _ => Request,
         }

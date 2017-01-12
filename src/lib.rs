@@ -1,5 +1,5 @@
 //! Library to used to access the Github API with Rust
-#![feature(custom_derive, proc_macro, plugin)]
+#![feature(custom_derive, plugin)]
 #![cfg_attr(feature = "dev", plugin(clippy))]
 // This allows for better enforc
 // unstable_features add one day when custom derive is stableed style and project features
@@ -14,7 +14,6 @@ extern crate serde_json;
 extern crate hyper;
 
 // Only here for error handling with hyper
-extern crate solicit;
 extern crate url;
 
 // This has to be here so the macros are available everywhere

@@ -2,19 +2,18 @@
 authors = ["Michael Gattozzi <mgattozzi@gmail.com>"]
 description = "Pure Rust bindings to the Github API"
 name = "github-rs"
-version = "0.3.0"
+version = "0.4.0"
 license = "MIT"
 repository = "https://github.com/mgattozzi/github-rs.git"
 homepage = "https://github.com/mgattozzi/github-rs"
 documentation = "https://mgattozzi.github.io/github-rs"
 
 [dependencies]
-hyper = "0.9.10"
-serde = "^0.8.0"
-serde_json = "^0.8.0"
-serde_derive = "^0.8.0"
-solicit = "0.4.4"
-url = "1.1.1"
+hyper = "~0.10.0"
+serde = "~0.8.22"
+serde_json = "~0.8.4"
+serde_derive = "~0.8.22"
+url = "~1.2.4"
 
 [dependencies.clippy]
 optional = true
