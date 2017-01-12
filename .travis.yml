@@ -18,15 +18,6 @@ addons:
 before_install:
 - openssl aes-256-cbc -K $encrypted_b63566236b41_key -iv $encrypted_b63566236b41_iv
   -in auth_token.enc -out tests/auth_token -d
-- |
-    if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-      brew update
-      brew install openssl
-      brew link --force openssl
-      export OPENSSL_INCLUDE_DIR=`brew --prefix openssl`/include
-      export OPENSSL_LIB_DIR=`brew --prefix openssl`/lib
-      export DEP_OPENSSL_INCLUDE=`brew --prefix openssl`/include
-    fi
 script:
 - cargo build && cargo test
 after_success: |
