@@ -5,6 +5,8 @@ use hyper::header::{Accept, UserAgent, Authorization, Headers, qitem};
 use hyper::mime::Mime;
 use hyper::client::Client;
 use hyper::status::StatusCode;
+use hyper::net::HttpsConnector;
+use hyper_rustls::TlsClient;
 use types::*;
 use error::*;
 use std::io::Read;
@@ -93,7 +95,7 @@ pub fn pagination(url: &mut String, page: Option<u64>, num_per: Option<u64>) {
 
 /// GET requests
 pub fn get(url: &str, input_headers: Headers) -> Result<RawJSON> {
-    let client = Client::new();
+    let client = Client::with_connector(HttpsConnector::new(TlsClient::new()));
     let request = client.get(url);
     let mut buffer = String::new();
 
@@ -109,7 +111,7 @@ pub fn get(url: &str, input_headers: Headers) -> Result<RawJSON> {
 
 /// GET request with only the status code returned
 pub fn get_status_code(url: &str, input_headers: Headers) -> Result<StatusCode> {
-    let client = Client::new();
+    let client = Client::with_connector(HttpsConnector::new(TlsClient::new()));
     let request = client.get(url);
 
     // Send a request and read out the JSON response into a buffer
@@ -123,7 +125,7 @@ pub fn get_status_code(url: &str, input_headers: Headers) -> Result<StatusCode> 
 /// that things went right
 pub fn put(url: &str, input_headers: Headers) -> Result<StatusCode> {
 
-    let client = Client::new();
+    let client = Client::with_connector(HttpsConnector::new(TlsClient::new()));
     let request = client.put(url);
 
     // Send a request and read out the JSON response into a buffer
@@ -135,7 +137,7 @@ pub fn put(url: &str, input_headers: Headers) -> Result<StatusCode> {
 /// POST requests
 pub fn post(url: &str, input_headers: Headers, json: String) -> Result<RawJSON> {
 
-    let client = Client::new();
+    let client = Client::with_connector(HttpsConnector::new(TlsClient::new()));
     let request = client.post(url).body(json.as_bytes());
     let mut buffer = String::new();
 
@@ -152,7 +154,7 @@ pub fn post(url: &str, input_headers: Headers, json: String) -> Result<RawJSON> 
 /// that things went right
 pub fn delete(url: &str, input_headers: Headers) -> Result<StatusCode> {
 
-    let client = Client::new();
+    let client = Client::with_connector(HttpsConnector::new(TlsClient::new()));
     let request = client.delete(url);
 
     // Send a request and read out the JSON response into a buffer
@@ -164,7 +166,7 @@ pub fn delete(url: &str, input_headers: Headers) -> Result<StatusCode> {
 /// DELETE requests with specific data to remove
 pub fn delete_with_data(url: &str, input_headers: Headers, json: String) -> Result<StatusCode> {
 
-    let client = Client::new();
+    let client = Client::with_connector(HttpsConnector::new(TlsClient::new()));
     let request = client.delete(url).body(json.as_bytes());
 
     // Send a request and read out the JSON response into a buffer
@@ -175,7 +177,7 @@ pub fn delete_with_data(url: &str, input_headers: Headers, json: String) -> Resu
 
 /// PATCH requests
 pub fn patch(url: &str, input_headers: Headers, json: String) -> Result<RawJSON> {
-    let client = Client::new();
+    let client = Client::with_connector(HttpsConnector::new(TlsClient::new()));
     let request = client.patch(url).body(json.as_bytes());
     let mut buffer = String::new();
 

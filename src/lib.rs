@@ -12,6 +12,7 @@ extern crate serde_derive;
 extern crate serde;
 extern crate serde_json;
 extern crate hyper;
+extern crate hyper_rustls;
 
 // Only here for error handling with hyper
 extern crate url;

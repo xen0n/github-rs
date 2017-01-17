@@ -10,6 +10,7 @@ documentation = "https://mgattozzi.github.io/github-rs"
 
 [dependencies]
 hyper = "~0.10.0"
+hyper-rustls= "~0.3.0"
 serde = "~0.8.22"
 serde_json = "~0.8.4"
 serde_derive = "~0.8.22"
