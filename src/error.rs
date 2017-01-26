@@ -8,8 +8,8 @@ use std::error;
 use std::io;
 use std::fmt;
 use std::result;
-use std::string;
 use std::str::Utf8Error;
+
 // -----------------------------------------------------------------------------------------//
 //                              ERROR TYPE ALIASES                                         //
 // -----------------------------------------------------------------------------------------//
@@ -25,13 +25,8 @@ pub type Result<T> = result::Result<T, GithubError>;
 #[derive(Debug)]
 pub enum GithubError {
     // SERDE ERRORS
-    /// Encountered if serde cannot deserialize JSON returned from the API or it cannot serialize
-    /// a struct into JSON to be sent to the API.
-    JsonParsingSyntax(serdeErr::ErrorCode, usize, usize),
-    /// While parsing with serde an IO error occured.
-    JsonParsingIo(io::Error),
-    /// While converting from Utf8 into a byte string for the request to the API an error occured
-    JsonParsingFromUtf8(string::FromUtf8Error),
+    ///A value that holds all possible Serde Errors
+    Json(serdeErr::Error),
     // HYPER ERRORS
     /// A General error for the hyper library when none of the other errors work for it.
     Request,
@@ -92,9 +87,8 @@ impl error::Error for GithubError {
     fn description(&self) -> &str {
         use self::GithubError::*;
         match *self {
-            JsonParsingSyntax(..) => "Syntax Error",
-            JsonParsingIo(ref err) | RequestIo(ref err) => error::Error::description(err),
-            JsonParsingFromUtf8(..) => "UTF-8 Error",
+            Json(ref err) => error::Error::description(err),
+            RequestIo(ref err) => error::Error::description(err),
             RequestMethod => "Method in Headers was malformed",
             RequestUri(ref err) => error::Error::description(err),
             RequestVersion => "Request protocol in Headers was malformed",
@@ -127,12 +121,8 @@ impl error::Error for GithubError {
 
 impl From<serdeErr::Error> for GithubError {
     fn from(serde: serdeErr::Error) -> Self {
-        use self::GithubError::*;
-        use serde_json::error::Error::*;
-        match serde {
-            Syntax(x, y, z) => JsonParsingSyntax(x, y, z),
-            Io(err) => JsonParsingIo(err),
-        }
+        use self::GithubError::Json;
+        Json(serde)
     }
 }
 
