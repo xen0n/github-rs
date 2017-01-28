@@ -3,8 +3,13 @@
 
 // This allows for better enforc
 // unstable_features add one day when custom derive is stableed style and project features
-#![deny(missing_docs, missing_debug_implementations, missing_copy_implementations,
-        trivial_casts, trivial_numeric_casts, unsafe_code, unused_import_braces,
+#![deny(missing_docs,
+        missing_debug_implementations,
+        missing_copy_implementations,
+        trivial_casts,
+        trivial_numeric_casts,
+        unsafe_code,
+        unused_import_braces,
         unused_qualifications)]
 
 #[macro_use]
@@ -37,7 +42,8 @@ mod pull_requests;
 mod reactions;
 mod repositories;
 mod requests;
+mod review;
 mod search;
 mod types;
 mod users;
-
+mod collaborators;

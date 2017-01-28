@@ -31,7 +31,7 @@ pub trait Users {
     /// ### Request Type:
     /// `GET`
     /// ### Endpoint:
-    /// /users/:username/keys
+    /// /users/:username
     /// ### Description
     /// Returns a Vector of all `SSHKeys` from the username specified
     fn get_users_username(&self, username: &str) -> Result<User>;
