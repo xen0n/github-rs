@@ -110,7 +110,7 @@ pub use activity::Activity;
 pub use git_data::GitData;
 // pub use enterprise::Enterprise;
 // pub use gists::Gists;
-// pub use issues::Issues;
+pub use issues::Issues;
 // pub use migration::Migration;
 pub use miscellaneous::Misc;
 // pub use oauth::Oauth;
@@ -121,6 +121,8 @@ pub use repositories::Repos;
 // pub use search::Search;
 pub use types::*;
 pub use users::Users;
+pub use review::Reviews;
+pub use collaborators::Collaborators;
 
 // We want people to see the structs. By re-exporting it here, the actual calls are obscured and
 // it's just the thing returned. JSON doesn't even have to be touched by the user directly
@@ -176,14 +178,17 @@ impl Client {
 
     /// Create a new `Client` with more control then the
     /// default `new` method
-    pub fn new_custom(acc_token: AccessToken, media: MediaType, user_agent: &str) -> Result<Client> {
-        let mime = media_to_mime(media)?;
+    pub fn new_custom(acc_token: AccessToken, media: Vec<MediaType>, user_agent: &str) -> Result<Client> {
+        let mut mimes = vec![];
+        for i in media.into_iter() {
+            mimes.push(qitem(media_to_mime(i)?));
+        }
         let token = String::from("token ") + &acc_token;
 
         let mut custom_headers = Headers::new();
         custom_headers.set(UserAgent(String::from(user_agent)));
         custom_headers.set(Authorization(token));
-        custom_headers.set(Accept(vec![qitem(mime)]));
+        custom_headers.set(Accept(mimes));
 
         Ok(Client {
             token: acc_token,

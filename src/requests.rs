@@ -42,7 +42,11 @@ pub enum MediaType {
     /// Get HTML back from the API
     Html,
     /// Get Base64 back from the API
-    Base64
+    Base64,
+    /// Allow Reviews API Access
+    Reviews,
+    /// Get Collaborators API Access
+    Collaborators
 }
 
 /// Change a `MediaType` into it's coresponding Mime type for requests
@@ -62,6 +66,9 @@ pub fn media_to_mime(media: MediaType) -> Result<Mime> {
         MediaType::Sha      => Ok(try_mime!("application/vnd.github.v3.sha".parse())),
         MediaType::Html     => Ok(try_mime!("application/vnd.github.v3.html".parse())),
         MediaType::Base64   => Ok(try_mime!("application/vnd.github.v3.base64".parse())),
+        // For Preview based requests
+        MediaType::Reviews => Ok(try_mime!("application/vnd.github.black-cat-preview+json".parse())),
+        MediaType::Collaborators => Ok(try_mime!("application/vnd.github.korra-preview".parse())),
     }
 }
 
@@ -77,7 +84,6 @@ pub fn default_headers(auth_token: AccessToken) -> Result<Headers> {
     headers.set(UserAgent(String::from("github-rs")));
     headers.set(Authorization(token));
     headers.set(Accept(vec![qitem(mime)]));
-
     Ok(headers)
 }
 
