@@ -69,7 +69,7 @@ impl Reviews  for Client {
     fn delete_review(&self, owner: &str, repo: &str, number: u64, id: u64) -> Result<()> {
         let url = format!("https://api.github.com/repos/{}/{}/pulls/{}/reviews/{}/events",
                           owner, repo, number, id);
-        let res = delete(&url,
+        let _ = delete(&url,
                         self.get_headers().clone())?;
         Ok(())
     }

@@ -38,7 +38,7 @@ impl Issues for Client {
         // This returns a status code we want it to return actual data
         // This part is inconsistent with Github docs saying deletes don't
         // return anything
-        let res = delete_with_data(&url,
+        let _ = delete_with_data(&url,
                                    self.get_headers().clone(),
                                    serde_json::to_string(&assignees)?)?;
         Ok(())
