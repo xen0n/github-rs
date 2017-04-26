@@ -306,6 +306,7 @@ GitHub V3 API Pre-release
 
 ## GET
 - [ ] /integration/installations
+- [ ] /integration/installations/:installation_id
 - [ ] /integration/repositories
 - [ ] /licenses
 - [ ] /licenses/:license
@@ -344,6 +345,7 @@ GitHub V3 API Pre-release
 - [ ] /user/blocks/:username
 - [ ] /user/gpg_keys
 - [ ] /user/gpg_keys/:id
+- [ ] /user/installations?access_token=...
 - [ ] /user/memberships/orgs
 - [ ] /user/memberships/orgs/:org
 - [ ] /user/repository_invitations
