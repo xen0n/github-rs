@@ -21,6 +21,10 @@ github-rs is intended to work on all tier 1 supported Rust systems:
 - Linux
 - MacOSX
 
+## Minimum Compiler Version
+Due to the use of certain features github-rs requires rustc version 1.18 or
+higher.
+
 ## Project Aims
 - Have a robust API where everything is error handled properly to avoid
   panics of any kind. A library is the base of an application and should
