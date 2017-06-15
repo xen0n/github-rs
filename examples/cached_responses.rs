@@ -3,7 +3,7 @@ use github_rs::client::Github;
 use github_rs::headers::{ etag, rate_limit_remaining };
 
 fn main() {
-    let client = Github::new("Your Auth Token Here");
+    let client = Github::new("Your Auth Token Here").unwrap();
     let me = client.get()
                    .user()
                    .execute();

@@ -5,7 +5,7 @@ use tokio_core::reactor::Core;
 
 // Hyper Imports
 use hyper::{ Body, Headers, Uri, Method, Error };
-use hyper::client::{ Client, Request };
+use hyper::client::{ Client, HttpConnector, Request };
 use hyper::header::{ Authorization, Accept, ContentType,
                      ETag, IfNoneMatch, UserAgent, qitem };
 use hyper::mime::Mime;
@@ -31,7 +31,7 @@ use std::cell::RefCell;
 pub struct Github {
     token: String,
     core: Rc<RefCell<Core>>,
-    client: Rc<Client<HttpsConnector>>,
+    client: Rc<Client<HttpsConnector<HttpConnector>>>,
 }
 
 impl Clone for Github {
@@ -70,18 +70,19 @@ impl Github {
     /// Create a new Github client struct. It takes a type that can convert into
     /// an &str (`String` or `Vec<u8>` for example). As long as the function is
     /// given a valid API Token your requests will work.
-    pub fn new<T>(token: T) -> Self
+    pub fn new<T>(token: T) -> Result<Self>
         where T: AsRef<str> {
-        let core = Core::new().unwrap();
+        let core = Core::new().chain_err(|| "Unable to build a new Core")?;
         let handle = core.handle();
         let client = Client::configure()
-            .connector(HttpsConnector::new(4,&handle))
+            .connector(HttpsConnector::new(4,&handle)
+                       .chain_err(|| "Unable to build HttpsConnector")?)
             .build(&handle);
-        Self {
+        Ok(Self {
             token: token.as_ref().into(),
             core: Rc::new(RefCell::new(core)),
             client: Rc::new(client),
-        }
+        })
     }
 
     /// Get the currently set Authorization Token
