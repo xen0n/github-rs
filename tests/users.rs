@@ -16,7 +16,7 @@ fn auth_token() -> Result<String, std::io::Error> {
 #[test]
 fn get_user_repos() {
     // We want it to fail
-    let g = Github::new(&auth_token().unwrap());
+    let g = Github::new(&auth_token().unwrap()).unwrap();
     let (headers, status, json) = g.get()
                                    .repos()
                                    .owner("mgattozzi")
@@ -33,7 +33,7 @@ fn get_user_repos() {
 #[test]
 fn cached_response() {
     // We want it to fail
-    let g = Github::new(&auth_token().unwrap());
+    let g = Github::new(&auth_token().unwrap()).unwrap();
     let (headers, _, _) = g.get()
                            .repos()
                            .owner("mgattozzi")
@@ -58,7 +58,7 @@ fn cached_response() {
 
 #[test]
 fn core_exposure() {
-    let g = Github::new(&auth_token().unwrap());
+    let g = Github::new(&auth_token().unwrap()).unwrap();
     // Can we get the core for users to have?
     let core = g.get_core();
     let core_mut = core.try_borrow_mut().unwrap();
