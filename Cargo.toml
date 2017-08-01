@@ -10,7 +10,7 @@ documentation = "https://mgattozzi.github.io/github-rs"
 
 [dependencies]
 hyper = "0.11"
-hyper-tls = "0.1"
+hyper-rustls = "0.8"
 error-chain = "0.10"
 tokio-core = "0.1"
 futures = "0.1"
