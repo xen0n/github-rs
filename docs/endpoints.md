@@ -57,12 +57,15 @@ GitHub V3 API
 - [ ] /repos/:owner/:repo/collaborators/:username/permission
 - [ ] /repos/:owner/:repo/comments
 - [ ] /repos/:owner/:repo/comments/:id
-- [ ] /repos/:owner/:repo/commits
+- [X] /repos/:owner/:repo/commits
 - [ ] /repos/:owner/:repo/commits/:ref
 - [ ] /repos/:owner/:repo/commits/:ref/comments
 - [ ] /repos/:owner/:repo/commits/:ref/status
 - [ ] /repos/:owner/:repo/commits/:ref/statuses
-- [ ] /repos/:owner/:repo/commits/:sha
+- [X] /repos/:owner/:repo/commits/:sha
+- [X] /repos/:owner/:repo/commits/:sha/comments
+- [X] /repos/:owner/:repo/commits/:sha/status
+- [X] /repos/:owner/:repo/commits/:sha/statuses
 - [ ] /repos/:owner/:repo/compare/:base...:head
 - [ ] /repos/:owner/:repo/contents/:path
 - [ ] /repos/:owner/:repo/contributors
@@ -100,15 +103,15 @@ GitHub V3 API
 - [ ] /repos/:owner/:repo/pages/builds
 - [ ] /repos/:owner/:repo/pages/builds/:id
 - [ ] /repos/:owner/:repo/pages/builds/latest
-- [ ] /repos/:owner/:repo/pulls
-- [ ] /repos/:owner/:repo/pulls/comments
-- [ ] /repos/:owner/:repo/pulls/comments/:id
-- [ ] /repos/:owner/:repo/pulls/:number
-- [ ] /repos/:owner/:repo/pulls/:number/comments
-- [ ] /repos/:owner/:repo/pulls/:number/commits
-- [ ] /repos/:owner/:repo/pulls/:number/files
-- [ ] /repos/:owner/:repo/pulls/:number/requested_reviewers
-- [ ] /repos/:owner/:repo/pulls/:number/merge
+- [X] /repos/:owner/:repo/pulls
+- [X] /repos/:owner/:repo/pulls/comments
+- [X] /repos/:owner/:repo/pulls/comments/:id
+- [X] /repos/:owner/:repo/pulls/:number
+- [X] /repos/:owner/:repo/pulls/:number/comments
+- [X] /repos/:owner/:repo/pulls/:number/commits
+- [X] /repos/:owner/:repo/pulls/:number/files
+- [X] /repos/:owner/:repo/pulls/:number/requested_reviewers
+- [X] /repos/:owner/:repo/pulls/:number/merge
 - [ ] /repos/:owner/:repo/readme
 - [ ] /repos/:owner/:repo/releases
 - [ ] /repos/:owner/:repo/releases/assets/:id
@@ -206,7 +209,7 @@ GitHub V3 API
 - [ ] /repos/:owner/:repo/pulls
 - [ ] /repos/:owner/:repo/pulls/comments
 - [ ] /repos/:owner/:repo/releases
-- [ ] /repos/:owner/:repo/statuses/:sha
+- [X] /repos/:owner/:repo/statuses/:sha
 - [X] /user/emails
 - [ ] /user/keys
 - [ ] /user/repos
