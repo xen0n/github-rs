@@ -9,7 +9,7 @@
 #[macro_use]
 extern crate error_chain;
 extern crate hyper;
-extern crate hyper_tls;
+extern crate hyper_rustls;
 extern crate futures;
 extern crate tokio_core;
 extern crate serde;

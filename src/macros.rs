@@ -128,7 +128,7 @@ macro_rules! new_type {
         pub struct $i<'g> {
             pub(crate) request: Result<RefCell<Request<Body>>>,
             pub(crate) core: &'g Rc<RefCell<Core>>,
-            pub(crate) client: &'g Rc<Client<HttpsConnector<HttpConnector>>>,
+            pub(crate) client: &'g Rc<Client<HttpsConnector>>,
         }
         )*
     );
@@ -260,9 +260,8 @@ macro_rules! func_client{
 macro_rules! imports{
     () => (
         use tokio_core::reactor::Core;
-        use hyper_tls::HttpsConnector;
+        use hyper_rustls::HttpsConnector;
         use hyper::client::Client;
-        use hyper::client::HttpConnector;
         use hyper::client::Request;
         use hyper::StatusCode;
         use hyper::{ Body, Headers };

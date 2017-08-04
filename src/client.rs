@@ -5,12 +5,12 @@ use tokio_core::reactor::Core;
 
 // Hyper Imports
 use hyper::{ Body, Headers, Uri, Method, Error };
-use hyper::client::{ Client, HttpConnector, Request };
+use hyper::client::{ Client, Request };
 use hyper::header::{ Authorization, Accept, ContentType,
                      ETag, IfNoneMatch, UserAgent, qitem };
 use hyper::mime::Mime;
 use hyper::StatusCode;
-use hyper_tls::HttpsConnector;
+use hyper_rustls::HttpsConnector;
 
 // Serde Imports
 use serde::Serialize;
@@ -31,7 +31,7 @@ use std::cell::RefCell;
 pub struct Github {
     token: String,
     core: Rc<RefCell<Core>>,
-    client: Rc<Client<HttpsConnector<HttpConnector>>>,
+    client: Rc<Client<HttpsConnector>>,
 }
 
 impl Clone for Github {
@@ -75,8 +75,7 @@ impl Github {
         let core = Core::new().chain_err(|| "Unable to build a new Core")?;
         let handle = core.handle();
         let client = Client::configure()
-            .connector(HttpsConnector::new(4,&handle)
-                       .chain_err(|| "Unable to build HttpsConnector")?)
+            .connector(HttpsConnector::new(4,&handle))
             .build(&handle);
         Ok(Self {
             token: token.as_ref().into(),
