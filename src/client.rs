@@ -332,6 +332,7 @@ impl <'g> PostQueryBuilder<'g> {
     /// if you need access to a hidden endpoint.
     func_client!(custom_endpoint, CustomQuery, endpoint_str);
     func_client!(user, users::post::User<'g>);
+    func_client!(repos, repos::post::Repos<'g>);
 
     /// Add an etag to the headers of the request
     pub fn set_etag(mut self, tag: ETag) -> Self {
