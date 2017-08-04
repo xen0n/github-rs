@@ -2,11 +2,11 @@
 authors = ["Michael Gattozzi <mgattozzi@gmail.com>"]
 description = "Pure Rust bindings to the Github API"
 name = "github-rs"
-version = "0.5.0"
+version = "0.5.1"
 license = "MIT"
 repository = "https://github.com/mgattozzi/github-rs.git"
 homepage = "https://github.com/mgattozzi/github-rs"
-documentation = "https://docs.rs/github-rs/0.5.0/github_rs/"
+documentation = "https://docs.rs/github-rs/"
 
 [dependencies]
 hyper = "0.11"
