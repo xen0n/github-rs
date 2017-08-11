@@ -97,7 +97,7 @@ impl Github {
     }
 
     /// Exposes the inner event loop for those who need
-    /// access to it. The reccomended way to safely access
+    /// access to it. The recommended way to safely access
     /// the core would be
     ///
     /// ```text
@@ -111,7 +111,7 @@ impl Github {
     ///
     /// This is how other parts of the API are implemented to avoid causing your
     /// program to crash unexpectedly. While you could borrow without the
-    /// `Result` being handled it's highly reccomended you don't unless you know
+    /// `Result` being handled it's highly recommended you don't unless you know
     /// there is no other mutable reference to it.
     pub fn get_core(&self) -> &Rc<RefCell<Core>> {
         &self.core
@@ -383,8 +383,8 @@ impl <'g> Executor<'g> {
     pub fn execute(self) -> Result<(Headers, StatusCode, Option<Json>)> {
         let mut core_ref = self.core
                             .try_borrow_mut()
-                            .chain_err(|| "Unable to get mutable borrow\
-                                            to the event loop")?;
+                            .chain_err(|| "Unable to get mutable borrow \
+                                           to the event loop")?;
         let client = self.client;
         let work = client
                     .request(self.request?.into_inner())
