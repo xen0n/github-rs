@@ -13,6 +13,11 @@ new_type!(
     CommitsStatus
     CommitsStatuses
     Commits
+    Issues
+    IssuesComments
+    IssuesCommentsId
+    IssuesNumber
+    IssuesNumberComments
     Repo
     Repos
     Owner
@@ -58,6 +63,22 @@ from!(
        => CommitsSha
     @Commits
        => Executor
+    @Issues
+       -> IssuesComments = "comments"
+    @Issues
+       => IssuesNumber
+       => Executor
+    @IssuesComments
+       => IssuesCommentsId
+       => Executor
+    @IssuesCommentsId
+       => Executor
+    @IssuesNumber
+       -> IssuesNumberComments = "comments"
+    @IssuesNumber
+       => Executor
+    @IssuesNumberComments
+       => Executor
     @GetQueryBuilder
        -> Repos = "repos"
     @Owner
@@ -72,6 +93,7 @@ from!(
        -> Commits = "commits"
     @Repo
        -> Pulls = "pulls"
+       -> Issues = "issues"
     @Repo
        => Executor
     @Repos
@@ -153,7 +175,27 @@ impl_macro!(
         |=> sha -> CommitsSha = sha_str
     @Commits
         |
-        |->execute
+        |-> execute
+
+    @Issues
+        |=> comments -> IssuesComments
+        |
+        |=> number -> IssuesNumber = issue_number
+        |-> execute
+    @IssuesComments
+        |
+        |=> id -> IssuesCommentsId = comment_id
+        |-> execute
+    @IssuesCommentsId
+        |
+        |-> execute
+    @IssuesNumber
+        |=> comments -> IssuesNumberComments
+        |
+        |-> execute
+    @IssuesNumberComments
+        |
+        |-> execute
 
     @Owner
         |
@@ -164,6 +206,7 @@ impl_macro!(
         |=> collaborators ->  Collaborators
         |=> commits -> Commits
         |=> pulls -> Pulls
+        |=> issues -> Issues
         |
         |-> execute
 
