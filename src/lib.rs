@@ -34,3 +34,5 @@ pub mod repos;
 pub mod search;
 pub mod teams;
 pub mod users;
+
+pub use hyper::{Headers, StatusCode};
