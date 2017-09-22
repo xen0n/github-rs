@@ -1,12 +1,14 @@
 extern crate github_rs;
+extern crate serde_json;
 use github_rs::client::Github;
 use github_rs::headers::{ etag, rate_limit_remaining };
+use serde_json::Value;
 
 fn main() {
     let client = Github::new("Your Auth Token Here").unwrap();
     let me = client.get()
                    .user()
-                   .execute();
+                   .execute::<Value>();
     match me {
         Ok((headers, _, _)) => {
 
@@ -15,7 +17,7 @@ fn main() {
                 let (headers, _, _) = client.get()
                                             .set_etag(etag)
                                             .user()
-                                            .execute()
+                                            .execute::<Value>()
                                             .expect("Well I existed before");
                 if let Some(limit) = limit {
                     println!("Asserting they are equal!");

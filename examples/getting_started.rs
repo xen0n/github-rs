@@ -1,11 +1,13 @@
 extern crate github_rs;
+extern crate serde_json;
 use github_rs::client::Github;
+use serde_json::Value;
 
 fn main() {
     let client = Github::new("API TOKEN").unwrap();
     let me = client.get()
                    .user()
-                   .execute();
+                   .execute::<Value>();
     match me {
         Ok((headers, status, json)) => {
             println!("{}", headers);
