@@ -1,11 +1,16 @@
+// Tokio/Future Imports
+use futures::{ Future, Stream };
+use futures::future::ok;
+use tokio_core::reactor::Core;
+
 // Hyper Imports
+use hyper::{ Body, Headers, Uri, Method, Error };
+use hyper::client::{ Client, Request };
 use hyper::header::{ Authorization, Accept, ContentType,
                      ETag, IfNoneMatch, UserAgent, qitem };
 use hyper::mime::Mime;
-
-// Reqwest Imports
-use reqwest::header::Headers;
-use reqwest::{ Client, Method, Request, StatusCode, Url };
+use hyper::StatusCode;
+use hyper_rustls::HttpsConnector;
 
 // Serde Imports
 use serde::de::DeserializeOwned;
@@ -17,19 +22,23 @@ use users;
 use misc;
 use repos;
 use errors::*;
+use util::url_join;
 
-use std::io::Read;
+use std::rc::Rc;
+use std::cell::RefCell;
 
 /// Struct used to make calls to the Github API.
 pub struct Github {
     token: String,
-    client: Client,
+    core: Rc<RefCell<Core>>,
+    client: Rc<Client<HttpsConnector>>,
 }
 
 impl Clone for Github {
     fn clone(&self) -> Self {
         Self {
             token: self.token.clone(),
+            core: self.core.clone(),
             client: self.client.clone(),
         }
     }
@@ -63,9 +72,15 @@ impl Github {
     /// given a valid API Token your requests will work.
     pub fn new<T>(token: T) -> Result<Self>
         where T: ToString {
+        let core = Core::new().chain_err(|| "Unable to build a new Core")?;
+        let handle = core.handle();
+        let client = Client::configure()
+            .connector(HttpsConnector::new(4,&handle))
+            .build(&handle);
         Ok(Self {
             token: token.to_string(),
-            client: Client::new()?,
+            core: Rc::new(RefCell::new(core)),
+            client: Rc::new(client),
         })
     }
 
@@ -79,6 +94,27 @@ impl Github {
     pub fn set_token<T>(&mut self, token: T)
         where T: ToString {
         self.token = token.to_string();
+    }
+
+    /// Exposes the inner event loop for those who need
+    /// access to it. The recommended way to safely access
+    /// the core would be
+    ///
+    /// ```text
+    /// let g = Github::new("API KEY");
+    /// let core = g.get_core();
+    /// // Handle the error here.
+    /// let ref mut core_mut = *core.try_borrow_mut()?;
+    /// // Do stuff with the core here. This prevents a runtime failure by
+    /// // having two mutable borrows to the core at the same time.
+    /// ```
+    ///
+    /// This is how other parts of the API are implemented to avoid causing your
+    /// program to crash unexpectedly. While you could borrow without the
+    /// `Result` being handled it's highly recommended you don't unless you know
+    /// there is no other mutable reference to it.
+    pub fn get_core(&self) -> &Rc<RefCell<Core>> {
+        &self.core
     }
 
     /// Begin building up a GET request to GitHub
@@ -99,7 +135,7 @@ impl Github {
             let serialized = serde_json::to_vec(&body);
             match serialized {
                 Ok(json) => {
-                    *qbr.body_mut() = Some(json.into());
+                    qbr.get_mut().set_body(json);
                     qb.request = Ok(qbr);
                 },
                 Err(_) => {
@@ -118,7 +154,7 @@ impl Github {
             let serialized = serde_json::to_vec(&body);
             match serialized {
                 Ok(json) => {
-                    *qbr.body_mut() = Some(json.into());
+                    qbr.get_mut().set_body(json);
                     qb.request = Ok(qbr);
                 },
                 Err(_) => {
@@ -138,7 +174,7 @@ impl Github {
             let serialized = serde_json::to_vec(&body);
             match serialized {
                 Ok(json) => {
-                    *qbr.body_mut() = Some(json.into());
+                    qbr.get_mut().set_body(json);
                     qb.request = Ok(qbr);
                 },
                 Err(_) => {
@@ -158,7 +194,7 @@ impl Github {
             let serialized = serde_json::to_vec(&body);
             match serialized {
                 Ok(json) => {
-                    *qbr.body_mut() = Some(json.into());
+                    qbr.get_mut().set_body(json);
                     qb.request = Ok(qbr);
                 },
                 Err(_) => {
@@ -218,7 +254,7 @@ impl <'g> GetQueryBuilder<'g> {
         match self.request {
             Ok(mut req) => {
                 let ETag(tag) = tag;
-                req.headers_mut().set(IfNoneMatch::Items(vec![tag]));
+                req.get_mut().headers_mut().set(IfNoneMatch::Items(vec![tag]));
                 self.request = Ok(req);
                 self
             }
@@ -246,7 +282,7 @@ impl <'g> PutQueryBuilder<'g> {
         match self.request {
             Ok(mut req) => {
                 let ETag(tag) = tag;
-                req.headers_mut().set(IfNoneMatch::Items(vec![tag]));
+                req.get_mut().headers_mut().set(IfNoneMatch::Items(vec![tag]));
                 self.request = Ok(req);
                 self
             }
@@ -274,7 +310,7 @@ impl <'g> DeleteQueryBuilder<'g> {
         match self.request {
             Ok(mut req) => {
                 let ETag(tag) = tag;
-                req.headers_mut().set(IfNoneMatch::Items(vec![tag]));
+                req.get_mut().headers_mut().set(IfNoneMatch::Items(vec![tag]));
                 self.request = Ok(req);
                 self
             }
@@ -303,7 +339,7 @@ impl <'g> PostQueryBuilder<'g> {
         match self.request {
             Ok(mut req) => {
                 let ETag(tag) = tag;
-                req.headers_mut().set(IfNoneMatch::Items(vec![tag]));
+                req.get_mut().headers_mut().set(IfNoneMatch::Items(vec![tag]));
                 self.request = Ok(req);
                 self
             },
@@ -331,7 +367,7 @@ impl <'g> PatchQueryBuilder<'g> {
         match self.request {
             Ok(mut req) => {
                 let ETag(tag) = tag;
-                req.headers_mut().set(IfNoneMatch::Items(vec![tag]));
+                req.get_mut().headers_mut().set(IfNoneMatch::Items(vec![tag]));
                 self.request = Ok(req);
                 self
             }
@@ -346,17 +382,33 @@ impl <'g> Executor<'g> {
 
     pub fn execute<T>(self) -> Result<(Headers, StatusCode, Option<T>)>
         where T: DeserializeOwned {
-        let mut rsp = self.client.execute(self.request?)?;
-        let mut data = Vec::new();
-        rsp.read_to_end(&mut data)
-            .chain_err(|| ErrorKind::Msg("failed to read data from the response".to_string()))?;
-        let json = if data.is_empty() {
-            None
-        } else {
-            Some(serde_json::from_slice(&data)
-                .chain_err(|| ErrorKind::Msg("failed to deserialize JSON response".to_string()))?)
-        };
-        Ok((rsp.headers().clone(), rsp.status(), json))
+        let mut core_ref = self.core
+                            .try_borrow_mut()
+                            .chain_err(|| "Unable to get mutable borrow \
+                                           to the event loop")?;
+        let client = self.client;
+        let work = client
+                    .request(self.request?.into_inner())
+                    .and_then(|res| {
+                        let header = res.headers().clone();
+                        let status = res.status();
+                        res.body().fold(Vec::new(), |mut v, chunk| {
+                            v.extend(&chunk[..]);
+                            ok::<_, Error>(v)
+                        }).map(move |chunks| {
+                            if chunks.is_empty() {
+                                Ok((header, status, None))
+                            } else {
+                                Ok((
+                                  header,
+                                  status,
+                                  Some(serde_json::from_slice(&chunks)
+                                       .chain_err(|| "Failed to parse response body")?)
+                                ))
+                            }
+                        })
+                    });
+        core_ref.run(work).chain_err(|| "Failed to execute request")?
     }
 
 }

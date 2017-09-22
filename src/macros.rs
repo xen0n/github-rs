@@ -7,6 +7,7 @@ macro_rules! from {
             fn from(f: $f<'g>) -> Self {
                 Self {
                     request: f.request,
+                    core: f.core,
                     client: f.client,
                 }
             }
@@ -21,11 +22,11 @@ macro_rules! from {
                 if f.request.is_ok() {
                     // We've checked that this works
                     let mut req = f.request.unwrap();
-                    let url = req.url().join($e)
+                    let url = url_join(req.get_mut().uri(), $e)
                         .chain_err(|| "Failed to parse Url");
                     match url {
                         Ok(u) => {
-                            *req.url_mut() = u;
+                            req.get_mut().set_uri(u);
                             f.request = Ok(req);
                         },
                         Err(e) => {
@@ -35,6 +36,7 @@ macro_rules! from {
 
                     Self {
                         request: f.request,
+                        core: f.core,
                         client: f.client,
                     }
 
@@ -42,6 +44,7 @@ macro_rules! from {
 
                     Self {
                         request: f.request,
+                        core: f.core,
                         client: f.client,
                     }
 
@@ -57,7 +60,7 @@ macro_rules! from {
                 use std::result;
                 use errors;
                 use hyper::mime::FromStrError;
-                let url = Url::parse("https://api.github.com")
+                let url = "https://api.github.com".parse::<Uri>()
                     .chain_err(||
                         "Url failed to parse"
                     );
@@ -75,13 +78,15 @@ macro_rules! from {
                             headers.set(Authorization(token));
                         }
                         Self {
-                            request: Ok(req),
+                            request: Ok(RefCell::new(req)),
+                            core: &gh.core,
                             client: &gh.client,
                         }
                     }
                     (Err(u), Ok(_)) => {
                         Self {
                             request: Err(u),
+                            core: &gh.core,
                             client: &gh.client,
                         }
                     }
@@ -93,6 +98,7 @@ macro_rules! from {
                                 ErrorKind::from(
                                     format!("Mime failed to parse: {:?}", e)
                                 ))),
+                            core: &gh.core,
                             client: &gh.client,
                         }
                     }
@@ -101,6 +107,7 @@ macro_rules! from {
                             request: Err(u).chain_err(||
                                 format!("Mime failed to parse: {:?}", e)
                             ),
+                            core: &gh.core,
                             client: &gh.client,
                         }
                     }
@@ -119,8 +126,9 @@ macro_rules! new_type {
     ($($i: ident)*) => (
         $(
         pub struct $i<'g> {
-            pub(crate) request: Result<Request>,
-            pub(crate) client: &'g Client,
+            pub(crate) request: Result<RefCell<Request<Body>>>,
+            pub(crate) core: &'g Rc<RefCell<Core>>,
+            pub(crate) client: &'g Rc<Client<HttpsConnector>>,
         }
         )*
     );
@@ -180,18 +188,14 @@ macro_rules! impl_macro {
                     // time I'd do is_ok(). Essentially this allows us
                     // to either pass the error message along or update
                     // the url
-                    use reqwest::Url;
                     if self.request.is_ok() {
                         // We've checked that this works
                         let mut req = self.request.unwrap();
-                        // We don't use `url.join` here because it uses a trailing slash as an
-                        // indicator, but some endpoints are both an "file" and "directory", so we
-                        // can't just add a trailing slash everywhere.
-                        let url = Url::parse(&format!("{}/{}", req.url().as_str(), $e))
+                        let url = url_join(req.get_mut().uri(), $e)
                             .chain_err(|| "Failed to parse Url");
                         match url {
                             Ok(u) => {
-                                *req.url_mut() = u;
+                                req.get_mut().set_uri(u);
                                 self.request = Ok(req);
                             },
                             Err(e) => {
@@ -237,11 +241,11 @@ macro_rules! func_client{
             if self.request.is_ok() {
                 // We've checked that this works
                 let mut req = self.request.unwrap();
-                let url = req.url().join($e)
+                let url = url_join(req.get_mut().uri(), $e)
                     .chain_err(|| "Failed to parse Url");
                 match url {
                     Ok(u) => {
-                        *req.url_mut() = u;
+                        req.get_mut().set_uri(u);
                         self.request = Ok(req);
                     },
                     Err(e) => {
@@ -257,9 +261,16 @@ macro_rules! func_client{
 /// Common imports for every file
 macro_rules! imports{
     () => (
+        use tokio_core::reactor::Core;
+        use hyper_rustls::HttpsConnector;
+        use hyper::client::Client;
+        use hyper::client::Request;
+        use hyper::StatusCode;
+        use hyper::{ Body, Headers };
         use errors::*;
-        use reqwest::header::Headers;
-        use reqwest::{ Client, Request, StatusCode };
+        use util::url_join;
         use serde::de::DeserializeOwned;
+        use std::rc::Rc;
+        use std::cell::RefCell;
     );
 }
