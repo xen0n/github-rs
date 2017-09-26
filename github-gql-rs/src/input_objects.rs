@@ -1,0 +1,11 @@
+pub struct CommitAuthor;
+pub struct DraftPullRequestReviewComment;
+pub struct GistOrder;
+pub struct IssueOrder;
+pub struct LanguageOrder;
+pub struct ProjectOrder;
+pub struct ReactionOrder;
+pub struct RepositoryOrder;
+pub struct StarOrder;
+pub struct TeamOrder;
+pub struct TeamRepositoryOrder;

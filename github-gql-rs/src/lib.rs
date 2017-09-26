@@ -1,5 +1,5 @@
 //! Library to used to access the Github API with Rust
-
+#![feature(associated_type_defaults)]
 #[macro_use]
 extern crate error_chain;
 extern crate hyper;
@@ -8,6 +8,8 @@ extern crate futures;
 extern crate tokio_core;
 extern crate serde;
 extern crate serde_json;
+extern crate git2;
+extern crate chrono;
 
 pub mod errors {
     error_chain!{
@@ -25,6 +27,15 @@ pub mod errors {
 pub mod client;
 pub mod query;
 pub mod mutation;
+
+pub mod connections;
+pub mod edges;
+pub mod objects;
+pub mod interfaces;
+pub mod enums;
+pub mod unions;
+pub mod input_objects;
+pub mod scalars;
 
 pub use hyper::{Headers, StatusCode};
 
