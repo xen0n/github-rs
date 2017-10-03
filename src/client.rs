@@ -366,6 +366,7 @@ impl <'g> PatchQueryBuilder<'g> {
     /// if you need access to a hidden endpoint.
     func_client!(custom_endpoint, CustomQuery, endpoint_str);
     func_client!(user, users::patch::User<'g>);
+    func_client!(gists, gists::patch::Gists<'g>);
 
     /// Add an etag to the headers of the request
     pub fn set_etag(mut self, tag: ETag) -> Self {
