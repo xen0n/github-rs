@@ -338,6 +338,7 @@ impl <'g> PostQueryBuilder<'g> {
     func_client!(custom_endpoint, CustomQuery, endpoint_str);
     func_client!(user, users::post::User<'g>);
     func_client!(repos, repos::post::Repos<'g>);
+    func_client!(gists, gists::post::Gists<'g>);
 
     /// Add an etag to the headers of the request
     pub fn set_etag(mut self, tag: ETag) -> Self {
