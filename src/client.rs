@@ -21,6 +21,7 @@ use serde_json;
 use users;
 use misc;
 use repos;
+use notifications;
 use errors::*;
 use util::url_join;
 use gists;
@@ -266,6 +267,9 @@ impl <'g> GetQueryBuilder<'g> {
     /// Query the organizations endpoint
     func_client!(organizations, misc::get::Organizations<'g>);
 
+    /// Query the notifications endpoint
+    func_client!(notifications, notifications::get::Notifications<'g>);
+
     /// Add an etag to the headers of the request
     pub fn set_etag(mut self, tag: ETag) -> Self {
         match self.request {
@@ -294,6 +298,7 @@ impl <'g> PutQueryBuilder<'g> {
     func_client!(custom_endpoint, CustomQuery, endpoint_str);
     func_client!(user, users::put::User<'g>);
     func_client!(gists, gists::put::Gists<'g>);
+    func_client!(notifications, notifications::put::Notifications<'g>);
 
     /// Add an etag to the headers of the request
     pub fn set_etag(mut self, tag: ETag) -> Self {
@@ -323,6 +328,7 @@ impl <'g> DeleteQueryBuilder<'g> {
     func_client!(custom_endpoint, CustomQuery, endpoint_str);
     func_client!(user, users::delete::User<'g>);
     func_client!(gists, gists::delete::Gists<'g>);
+    func_client!(notifications, notifications::delete::Notifications<'g>);
 
     /// Add an etag to the headers of the request
     pub fn set_etag(mut self, tag: ETag) -> Self {
@@ -382,6 +388,7 @@ impl <'g> PatchQueryBuilder<'g> {
     func_client!(custom_endpoint, CustomQuery, endpoint_str);
     func_client!(user, users::patch::User<'g>);
     func_client!(gists, gists::patch::Gists<'g>);
+    func_client!(notifications, notifications::patch::Notifications<'g>);
 
     /// Add an etag to the headers of the request
     pub fn set_etag(mut self, tag: ETag) -> Self {

@@ -20,9 +20,9 @@ GitHub V3 API
 - [ ] /issues
 - [X] /meta
 - [ ] /networks/:owner/:repo/events
-- [ ] /notifications
-- [ ] /notifications/threads/:id
-- [ ] /notifications/threads/:id/subscription
+- [X] /notifications
+- [X] /notifications/threads/:id
+- [X] /notifications/threads/:id/subscription
 - [X] /organizations
 - [X] /orgs/:org
 - [X] /orgs/:org/events
@@ -217,8 +217,8 @@ GitHub V3 API
 
 ## PUT
 - [X] /gists/:id/star
-- [ ] /notifications
-- [ ] /notifications/threads/:id/subscription
+- [X] /notifications
+- [X] /notifications/threads/:id/subscription
 - [ ] /orgs/:org/memberships/:username
 - [ ] /orgs/:org/outside_collaborator/:username
 - [ ] /orgs/:org/public_members/:username
@@ -243,7 +243,7 @@ GitHub V3 API
 - [X] /gists/:id
 - [X] /gists/:id/star
 - [X] /gists/:gist_id/comments/:id
-- [ ] /notifications/threads/:id/subscription
+- [X] /notifications/threads/:id/subscription
 - [ ] /orgs/:org/hooks/:id
 - [ ] /orgs/:org/members/:username
 - [ ] /orgs/:org/memberships/:username
@@ -283,7 +283,7 @@ GitHub V3 API
 ## PATCH
 - [X] /gists/:id
 - [X] /gists/:gist_id/comments/:id
-- [ ] /notifications/threads/:id
+- [X] /notifications/threads/:id
 - [ ] /orgs/:org
 - [ ] /orgs/:org/hooks/:id
 - [ ] /repos/:owner/:repo
