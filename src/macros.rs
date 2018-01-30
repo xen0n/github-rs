@@ -241,7 +241,8 @@ macro_rules! exec {
 macro_rules! impl_macro {
     ($(@$i: ident $(|=> $id1: ident -> $t1: ident)*|
      $(|=> $id2: ident -> $t2: ident = $e2: ident)*
-     $(|?> $id3: ident -> $t3: ident = $e3: ident)*)+
+     $(|?> $id3: ident -> $t3: ident = $e3: ident)*
+     $(|...> $id4: ident -> $t4: ident = $e4: ident)*)+
     )=> (
         $(
             impl<'g> $i <'g>{
@@ -274,6 +275,29 @@ macro_rules! impl_macro {
             )*$(
                 pub fn $id3(mut self, $e3: &str) -> $t3<'g> {
                     self.parameter = Some($e3.to_string());
+                    self.into()
+                }
+            )*$(
+                pub fn $id4(mut self, $e4: &str) -> $t4<'g> {
+                    // This is borrow checking abuse and about the only
+                    // time I'd do is_ok(). Essentially this allows us
+                    // to either pass the error message along or update
+                    // the url
+                    if self.request.is_ok() {
+                        // We've checked that this works
+                        let mut req = self.request.unwrap();
+                        use util::url_join_ellipsis;
+                        let url = url_join_ellipsis(req.get_mut().uri(), $e4);
+                        match url {
+                            Ok(u) => {
+                                req.get_mut().set_uri(u);
+                                self.request = Ok(req);
+                            },
+                            Err(e) => {
+                                self.request = Err(e.into());
+                            }
+                        }
+                    }
                     self.into()
                 }
             )*

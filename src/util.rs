@@ -23,3 +23,20 @@ pub fn url_join(url: &Uri, path: &str) -> Result<Uri, UriError> {
         _ => Uri::from_str("Failed to make a valid Url"),
     }
 }
+
+/// Add an ellipsis (...) to the end of the url. This is used by the
+/// "compare" endpoint.
+pub fn url_join_ellipsis(url: &Uri, path: &str) -> Result<Uri, UriError> {
+    match (url.scheme(), url.authority(), url.path()) {
+        (Some(s), Some(a), p) => {
+            let mut curr_path = String::from(s);
+            curr_path += "://";
+            curr_path += a;
+            curr_path += p;
+            curr_path.push_str("...");
+            curr_path.push_str(path);
+            curr_path.parse::<Uri>()
+        },
+        _ => Uri::from_str("Failed to make a valid Url"),
+    }
+}
