@@ -23,7 +23,7 @@ new_type!(
 
 from!(
     @GetQueryBuilder
-        -> Orgs = "organizations"
+        -> Orgs = "orgs"
     @Orgs
         => OrgsOrg
     @OrgsOrg
