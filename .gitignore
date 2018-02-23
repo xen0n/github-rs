@@ -10,6 +10,3 @@ Cargo.lock
 # github-gql-rs
 /github-gql-rs/target
 /github-gql-rs/tests/auth_token
-
-# compile tests
-/compile_tests/target
