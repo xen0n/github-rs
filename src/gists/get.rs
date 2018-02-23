@@ -3,7 +3,17 @@ imports!();
 use client::GetQueryBuilder;
 
 new_type!(
+    Gists
     GistsGistId
+    GistsGistIdComments
+    GistsGistIdCommentsId
+    GistsId
+    GistsIdCommits
+    GistsIdForks
+    GistsIdSha
+    GistsIdStar
+    GistsPublic
+    GistsStarred
 );
 
 from!(

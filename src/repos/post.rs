@@ -3,10 +3,12 @@ imports!();
 use client::PostQueryBuilder;
 
 new_type!(
+    Sha
     Statuses
     Repo
     Repos
     Owner
+    Issues
 );
 
 from!(

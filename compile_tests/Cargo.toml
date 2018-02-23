@@ -1,7 +1,0 @@
-[package]
-name = "github_rs_compile_tests"
-version = "0.1.0"
-
-[dependencies]
-compiletest_rs = "0.3"
-github-rs = { version = "*", path = "../" }

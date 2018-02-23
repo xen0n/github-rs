@@ -4,6 +4,7 @@ use client::DeleteQueryBuilder;
 
 new_type!(
     User
+    Emails
 );
 
 from!(

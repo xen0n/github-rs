@@ -4,8 +4,10 @@ use client::PatchQueryBuilder;
 
 new_type!(
     Gists
+    GistsId
     GistsGistId
     GistsGistIdComments
+    GistsGistIdCommentsId
 );
 
 from!(

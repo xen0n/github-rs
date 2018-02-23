@@ -3,8 +3,11 @@ imports!();
 use client::PostQueryBuilder;
 
 new_type!(
+    Gists
     GistsId
     GistsGistId
+    GistsIdForks
+    GistsGistIdComments
 );
 
 from!(
