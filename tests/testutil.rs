@@ -1,16 +1,18 @@
 extern crate github_rs as gh;
 
 use gh::client::Github;
+use std::fs::File;
+use std::io::prelude::*;
 use std::io::BufReader;
 use std::io::Error;
-use std::io::prelude::*;
-use std::fs::File;
 
-const INVALID_TOKEN_FILE: &'static str = "Your auth_token file is not setup properly. \
-Refer to the contributing guidelines to see how to set one up.";
+const INVALID_TOKEN_FILE: &'static str =
+    "Your auth_token file is not setup properly. \
+     Refer to the contributing guidelines to see how to set one up.";
 
-pub const FAILED_GITHUB_CONNECTION: &'static str = "Unable to connect with GitHub. \
-Make sure you have configured your access token correctly.";
+pub const FAILED_GITHUB_CONNECTION: &'static str =
+    "Unable to connect with GitHub. \
+     Make sure you have configured your access token correctly.";
 
 fn auth_token() -> Result<String, Error> {
     let file = File::open("tests/auth_token")?;
