@@ -1,7 +1,6 @@
-extern crate github_rs as gh;
-extern crate serde_json;
 use gh::client::Executor;
 use gh::headers::{etag, rate_limit_remaining};
+use github_rs as gh;
 use serde_json::Value;
 
 mod testutil;
@@ -15,7 +14,7 @@ fn get_user_repos() {
     let (headers, status, json) = g
         .get()
         .repos()
-        .owner("mgattozzi")
+        .owner("github-rs")
         .repo("github-rs")
         .execute::<Value>()
         .expect(testutil::FAILED_GITHUB_CONNECTION);
@@ -33,7 +32,7 @@ fn cached_response() {
     let (headers, _, _) = g
         .get()
         .repos()
-        .owner("mgattozzi")
+        .owner("github-rs")
         .repo("github-rs")
         .execute::<Value>()
         .expect(testutil::FAILED_GITHUB_CONNECTION);
@@ -44,7 +43,7 @@ fn cached_response() {
         .get()
         .set_etag(etag.unwrap())
         .repos()
-        .owner("mgattozzi")
+        .owner("github-rs")
         .repo("github-rs")
         .execute::<Value>()
         .expect(testutil::FAILED_GITHUB_CONNECTION);

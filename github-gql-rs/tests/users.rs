@@ -1,7 +1,6 @@
-extern crate github_gql as gh;
-extern crate serde_json;
 use gh::client::Github;
 use gh::query::Query;
+use github_gql as gh;
 use serde_json::Value;
 use std::fs::File;
 use std::io::prelude::*;
@@ -12,7 +11,8 @@ fn auth_token() -> Result<String, std::io::Error> {
     let file = File::open("tests/auth_token")?;
     let mut reader = BufReader::new(file);
     let mut buffer = String::new();
-    let _ = reader.read_line(&mut buffer)?;
+    reader.read_line(&mut buffer)?;
+    buffer = buffer.trim_end().to_string();
     Ok(buffer)
 }
 

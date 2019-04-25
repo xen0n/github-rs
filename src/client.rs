@@ -21,14 +21,14 @@ use serde::Serialize;
 use serde_json;
 
 // Internal Library Imports
-use errors::*;
-use gists;
-use misc;
-use notifications;
-use orgs;
-use repos;
-use users;
-use util::url_join;
+use crate::errors::*;
+use crate::gists;
+use crate::misc;
+use crate::notifications;
+use crate::orgs;
+use crate::repos;
+use crate::users;
+use crate::util::url_join;
 
 use std::cell::RefCell;
 use std::rc::Rc;
@@ -50,22 +50,16 @@ impl Clone for Github {
     }
 }
 
-/// All GET based queries can be constructed from this type
 new_type!(GetQueryBuilder);
 
-/// All PUT based queries can be constructed from this type
 new_type!(PutQueryBuilder);
 
-/// All POST based queries can be constructed from this type
 new_type!(PostQueryBuilder);
 
-/// All DELETE based queries can be constructed from this type
 new_type!(DeleteQueryBuilder);
 
-/// All PATCH based queries can be constructed from this type
 new_type!(PatchQueryBuilder);
 
-/// Queries for endpoints that aren't in this library can be crafted here
 new_type!(CustomQuery);
 
 exec!(CustomQuery);
@@ -88,7 +82,7 @@ impl Github {
         #[cfg(feature = "rustls")]
         let client = Client::builder().build(HttpsConnector::new(4));
         #[cfg(feature = "rust-native-tls")]
-        let client = Client::builder().build(HttpsConnector::new(4, &handle)?);
+        let client = Client::builder().build(HttpsConnector::new(4)?);
         Ok(Self {
             token: token.to_string(),
             core: Rc::new(RefCell::new(core)),
